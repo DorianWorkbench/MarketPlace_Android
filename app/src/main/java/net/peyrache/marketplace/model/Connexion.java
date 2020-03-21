@@ -4,11 +4,13 @@ public class Connexion {
     private String username;
     private String password;
 
+    //Constructeur
     public Connexion(String username, String password) {
         this.username = username;
         this.password = password;
     }
 
+    //Getters
     public String getUsername() {
         return username;
     }
@@ -16,10 +18,12 @@ public class Connexion {
     public String getPassword() {
         return password;
     }
+
+    /**
+     * Méthode de vérification de connexion
+     * @return Boolean pour les tests dans le MainActivity
+     */
     public Boolean verifUser(){
-        if(username.equals("toto") && password.equals("toto")){
-            return true;
-        }
-        return false;
+        return username.equals("toto") && password.equals("toto");
     }
 }

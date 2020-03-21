@@ -1,3 +1,19 @@
 <resources>
     <string name="app_name">Marketplace</string>
+
+    <string name="co_connexion">Connexion</string>
+
+    <string name="insc_client">Inscription client</string>
+    <string name="insc_username">Username</string>
+    <string name="insc_password">Password</string>
+    <string name="insc_email">Email</string>
+
+    <string name="insc_postalAddress">Postal address</string>
+    <string name="insc_manRB">Man</string>
+    <string name="insc_womanRB">Woman</string>
+    <string name="insc_surname">Surname</string>
+    <string name="insc_name">Name</string>
+    <string name="insc_inscrireBT">S\'inscrire</string>
+    <string name="insc_fournisseur">Fournisseur</string>
+
 </resources>

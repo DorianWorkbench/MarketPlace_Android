@@ -2,6 +2,7 @@ package net.peyrache.marketplace.view;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -15,11 +16,13 @@ import static android.text.TextUtils.isEmpty;
 
 public class MainActivity extends AppCompatActivity {
 
+    //Déclaration des variables d'objet graphique
     private EditText usernameET;
     private EditText passwordET;
     private Button connexionBT;
     private Button inscriptionBT;
-    private static CpageAccueil controle;
+    private CpageAccueil controle;
+    private Intent intent;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,6 +31,10 @@ public class MainActivity extends AppCompatActivity {
         init();
     }
 
+    /**
+     * Methode permettant plus de lisibilité dans le onCreate du MainActivity.
+     * Assignation des objets pour les variable objets créée précedement.
+     */
     private void init(){
         this.usernameET= findViewById(R.id.usernameET);
         this.passwordET= findViewById(R.id.passwordET);
@@ -38,9 +45,16 @@ public class MainActivity extends AppCompatActivity {
         ecouteurBoutonInscription();
     }
 
-    //Ecoute du bouton de connexion.
+    /**
+     * Ecoute du bouton de connexion.
+     */
     private void ecouteurBoutonConnexion(){
         connexionBT.setOnClickListener(new Button.OnClickListener(){
+
+            /**
+             * lors du click, une vérification sur les données de connexion est faite.
+             * @param v
+             */
             @Override
             public void onClick(View v) {
                 String username = MainActivity.this.usernameET.getText().toString();
@@ -57,12 +71,18 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
+
+    /**
+     * Permet l'écoute du bouton inscription.
+     * Surcharge de la méthode onClick pour ouvrir l'activity InscriptionActivity
+     */
     private void ecouteurBoutonInscription(){
         inscriptionBT.setOnClickListener(new Button.OnClickListener(){
 
             @Override
             public void onClick(View v) {
-                Toast.makeText(MainActivity.this, "Vous avez demandé à vous inscrire", Toast.LENGTH_SHORT).show();
+                intent=new Intent(MainActivity.this, InscriptionActivity.class);
+                startActivity(intent);
             }
         });
     }
