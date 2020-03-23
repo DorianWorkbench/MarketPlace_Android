@@ -39,7 +39,7 @@ public class SqLiteAccessRequest extends SQLiteOpenHelper {
 
     }
 
-    public void newUser(String username, String password, String email, String postalAddress, String type, String paiement, Integer sexe, String surname){
+    public void newUserAC(String username, String password, String email, String postalAddress, String type, String paiement, Integer sexe, String surname, String name, String rib){
         username = username.replace("'","''");
         password = password.replace("'","''");
         email = email.replace("'","''");
@@ -47,6 +47,33 @@ public class SqLiteAccessRequest extends SQLiteOpenHelper {
         type = type.replace("'", "''");
         paiement = paiement.replace("'", "''");
         surname = surname.replace("'", "''");
-        String strSql="INSERT INTO utilisateur(username, password, email, adresse, type, paiement, sexe, nom, prenom, rib) VALUES('"+username+"','"+password+"','"+email+"','"+postalAddress+"','"+type+"','"+paiement+"','"+sexe+"','"+surname+"')";
+        String strSql="INSERT INTO utilisateur(username, password, email, adresse, type, paiement, sexe, nom, prenom, rib) " +
+                        "VALUES('"+username+"','"+password+"','"+email+"','"+postalAddress+"','"+type+"','"
+                        +paiement+"','"+sexe+"','"+surname+"','"+name+"','"+rib+"')";
+        try{
+            this.getWritableDatabase().execSQL(strSql);
+            Log.d("newUserAC", "Création du nouvel utilisateur réussite ! ");
+        }catch (Exception e){
+            Log.d("newUserAC", "Erreur lors de l'execution de la requête");
+        }
+    }
+
+    public void newUserFO(String username, String password, String email, String postalAddress, String type, String paiement, Integer sexe, String surname, String name, String rib, String raisonSociale){
+        username = username.replace("'","''");
+        password = password.replace("'","''");
+        email = email.replace("'","''");
+        postalAddress = postalAddress.replace("'","''");
+        type = type.replace("'", "''");
+        paiement = paiement.replace("'", "''");
+        surname = surname.replace("'", "''");
+        String strSql="INSERT INTO utilisateur(username, password, email, adresse, type, paiement, sexe, nom, prenom, rib) " +
+                        "VALUES('"+username+"','"+password+"','"+email+"','"+postalAddress+"','"+type+"','"+paiement+"',"+sexe+",'" +
+                "       "+surname+"','"+name+"','"+rib+"','"+raisonSociale+"')";
+        try{
+            this.getWritableDatabase().execSQL(strSql);
+            Log.d("newUserFO", "Création du nouvel utilisateur réussite ! ");
+        }catch (Exception e){
+            Log.d("newUserFO", "Erreur lors de l'execution de la requête");
+        }
     }
 }

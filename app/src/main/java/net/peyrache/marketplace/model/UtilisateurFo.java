@@ -13,5 +13,4 @@ public class UtilisateurFo extends Utilisateur{
         this.rib=rib;
         this.raisonSociale=raisonSociale;
     }
-
 }

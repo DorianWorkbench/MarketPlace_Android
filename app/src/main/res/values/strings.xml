@@ -7,6 +7,7 @@
     <string name="insc_username">Username</string>
     <string name="insc_password">Password</string>
     <string name="insc_email">Email</string>
+    <string name="insc_rib">Rib</string>
 
     <string name="insc_postalAddress">Postal address</string>
     <string name="insc_manRB">Man</string>

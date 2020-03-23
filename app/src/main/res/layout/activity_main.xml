@@ -57,25 +57,30 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="670dp"
+            android:layout_height="723dp"
             android:layout_marginTop="90dp"
             android:layout_weight="1"
             android:orientation="vertical">
 
             <Button
                 android:id="@+id/connexionBT"
-                android:layout_width="match_parent"
+                android:layout_width="250dp"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginBottom="20dp"
+                android:background="#4C415C"
                 android:text="@string/co_connexion"
-                android:textColor="#673AB7" />
+                android:textColor="#FFFFFF" />
 
             <Button
                 android:id="@+id/inscriptionBT"
-                android:layout_width="match_parent"
+                android:layout_width="250dp"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:background="#A07DD1"
                 android:text="@string/insc_inscrireBT"
                 android:textAllCaps="false"
-                android:textColor="#2196F3" />
+                android:textColor="#FFFFFF" />
 
         </LinearLayout>
 

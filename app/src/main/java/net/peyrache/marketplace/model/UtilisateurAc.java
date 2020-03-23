@@ -35,4 +35,14 @@ public class UtilisateurAc extends Utilisateur {
     public String getPaiement() {
         return paiement;
     }
+
+    public void setSurname(String surname) {
+        this.surname = surname;
+    }
+
+    public void setPaiement(String paiement) {
+        this.paiement = paiement;
+    }
+
+
 }

@@ -5,8 +5,10 @@ public class InscriptionAc extends Inscription{
     private String name;
     private Integer sexe;
     private String paiement;
+    private String type;
 
-    public InscriptionAc(String inscUsername, String inscPassword, String inscEmail, String inscPostalAddress, String surname, String name, Integer sexe, String paiement, String rib) {
+    public InscriptionAc(String inscUsername, String inscPassword, String inscEmail,
+                         String inscPostalAddress, String surname, String name, Integer sexe, String rib) {
         this.inscUsername = inscUsername;
         this.inscPassword = inscPassword;
         this.inscEmail = inscEmail;
@@ -15,8 +17,18 @@ public class InscriptionAc extends Inscription{
         this.name = name;
         this.sexe = sexe;
         this.type = "ac";
-        this.paiement = paiement;
         this.rib = rib;
         this.paiement="Carte bancaire";
     }
+
+    public String getType() {
+        return type;
+    }
+
+    public String getPaiement() {
+        return paiement;
+    }
+
 }
+
+

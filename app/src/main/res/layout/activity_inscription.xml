@@ -29,7 +29,7 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="911dp"
+            android:layout_height="972dp"
             android:layout_marginLeft="30dp"
             android:layout_marginRight="30dp"
             android:layout_weight="1"
@@ -71,6 +71,15 @@
                 android:hint="@string/insc_postalAddress"
                 android:inputType="textPostalAddress" />
 
+
+            <EditText
+                android:id="@+id/ribET"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="@string/insc_rib"
+                android:autofillHints="@string/insc_rib"
+                android:inputType="textPersonName" />
 
             <RadioGroup
                 android:id="@+id/sexeRG"
