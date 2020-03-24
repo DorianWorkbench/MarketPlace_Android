@@ -17,10 +17,8 @@ import static android.text.TextUtils.isEmpty;
 public class MainActivity extends AppCompatActivity {
 
     //Déclaration des variables d'objet graphique
-    private EditText usernameET;
-    private EditText passwordET;
-    private Button connexionBT;
-    private Button inscriptionBT;
+    private EditText usernameET, passwordET;
+    private Button connexionBT, inscriptionBT;
     private CpageAccueil controle;
     private Intent intent;
 

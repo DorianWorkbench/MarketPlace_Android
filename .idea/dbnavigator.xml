@@ -2,7 +2,7 @@
 <project version="4">
   <component name="DBNavigator.Project.DataEditorManager">
     <record-view-column-sorting-type value="BY_INDEX" />
-    <value-preview-text-wrapping value="true" />
+    <value-preview-text-wrapping value="false" />
     <value-preview-pinned value="false" />
   </component>
   <component name="DBNavigator.Project.DataExportManager">
@@ -23,11 +23,7 @@
     <autoscroll-to-editor value="false" />
     <autoscroll-from-editor value="true" />
     <show-object-properties value="true" />
-    <loaded-nodes>
-      <connection connection-id="9ded7245-8c22-4ade-a4be-61d3dd7d9ff3">
-        <schema name="main" object-types="column, constraint, table, dataset trigger, view, index" />
-      </connection>
-    </loaded-nodes>
+    <loaded-nodes />
   </component>
   <component name="DBNavigator.Project.DatabaseConsoleManager">
     <connection id="9ded7245-8c22-4ade-a4be-61d3dd7d9ff3">
@@ -35,9 +31,7 @@
     </connection>
   </component>
   <component name="DBNavigator.Project.DatabaseFileManager">
-    <open-files>
-      <object connection-id="9ded7245-8c22-4ade-a4be-61d3dd7d9ff3" object-ref="schemas/main/tables/utilisateur" />
-    </open-files>
+    <open-files />
   </component>
   <component name="DBNavigator.Project.DatabaseSessionManager">
     <connection id="9ded7245-8c22-4ade-a4be-61d3dd7d9ff3" />
@@ -83,7 +77,7 @@
           <port value="1234" />
           <database value="database" />
           <files>
-            <file path="C:\Users\peyra\Desktop\Marketplace2.db" schema="main" />
+            <file path="C:\Users\peyra\Desktop\Marketplace.db" schema="main" />
           </files>
           <type value="NONE" />
           <user value="" />

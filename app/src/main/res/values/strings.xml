@@ -17,4 +17,13 @@
     <string name="insc_inscrireBT">S\'inscrire</string>
     <string name="insc_fournisseur">Fournisseur</string>
 
+
+    <string name="inscfo_title">Inscription fournisseur</string>
+    <string name="inscfo_username">Username</string>
+    <string name="inscfo_password">Password</string>
+    <string name="inscfo_email">Email</string>
+    <string name="inscfo_postalAddress">Postal address</string>
+    <string name="inscfo_rib">Rib</string>
+    <string name="inscfo_raisonSociale">Raison sociale</string>
+    <string name="inscfo_buttonSubscribe">S\'inscrire</string>
 </resources>

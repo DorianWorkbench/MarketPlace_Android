@@ -10,7 +10,6 @@ abstract class Inscription {
     protected String inscPassword;
     protected String inscEmail;
     protected String inscPostalAddress;
-    protected String type;
     protected String rib;
 
 

@@ -12,8 +12,6 @@ import android.widget.Toast;
 
 import net.peyrache.marketplace.R;
 import net.peyrache.marketplace.controller.CinscriptionActivity;
-import net.peyrache.marketplace.model.InscriptionAc;
-import net.peyrache.marketplace.tools.SqLiteAccessRequest;
 
 public class InscriptionActivity extends AppCompatActivity {
 
@@ -21,7 +19,7 @@ public class InscriptionActivity extends AppCompatActivity {
     private RadioButton man, woman;
     private Button subscribe, provider;
     private CinscriptionActivity inscriptionActivity;
-    private Intent intentMain;
+    private Intent intentMain, intentFournisseur;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,6 +42,7 @@ public class InscriptionActivity extends AppCompatActivity {
         provider = findViewById(R.id.provider);
         inscriptionActivity= new CinscriptionActivity();
         ecouteurInscription();
+        ecouteurProviderButton();
     }
     private void ecouteurInscription(){
 
@@ -52,6 +51,7 @@ public class InscriptionActivity extends AppCompatActivity {
 
             @Override
             public void onClick(View v) {
+
                 String inscUsername = inscUsernameET.getText().toString();
                 String inscPassword = inscPasswordET.getText().toString();
                 String inscEmailEt = inscEmail.getText().toString();
@@ -76,6 +76,16 @@ public class InscriptionActivity extends AppCompatActivity {
                 }
 
 
+            }
+        });
+    }
+    private void ecouteurProviderButton(){
+        provider.setOnClickListener(new Button.OnClickListener(){
+
+            @Override
+            public void onClick(View v) {
+                intentFournisseur = new Intent(InscriptionActivity.this, InscriptionFoActivity.class);
+                startActivity(intentFournisseur);
             }
         });
     }

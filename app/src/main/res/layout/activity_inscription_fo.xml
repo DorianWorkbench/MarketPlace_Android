@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".view.InscriptionFoActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/textView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:text="@string/inscfo_title"
+                android:textColor="#9F5709"
+                android:textSize="25sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="818dp"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <EditText
+                android:id="@+id/inscfoUsernameET"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:autofillHints="@string/inscfo_username"
+                android:ems="10"
+                android:hint="@string/inscfo_username"
+                android:inputType="textPersonName" />
+
+            <EditText
+                android:id="@+id/inscfoPasswordET"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:autofillHints="@string/inscfo_password"
+                android:ems="10"
+                android:hint="@string/inscfo_password"
+                android:inputType="textPassword" />
+
+            <EditText
+                android:id="@+id/inscfoEmailET"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:autofillHints="@string/inscfo_email"
+                android:ems="10"
+                android:hint="@string/inscfo_email"
+                android:inputType="textEmailAddress" />
+
+            <EditText
+                android:id="@+id/inscfoPostalAddressET"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:autofillHints="@string/inscfo_postalAddress"
+                android:ems="10"
+                android:hint="@string/inscfo_postalAddress"
+                android:inputType="textPostalAddress" />
+
+            <EditText
+                android:id="@+id/inscfoRibET"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:autofillHints="@string/insc_rib"
+                android:ems="10"
+                android:hint="@string/inscfo_rib"
+                android:inputType="textPersonName" />
+
+            <EditText
+                android:id="@+id/inscfoRaisonSocialeET"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:autofillHints="@string/inscfo_raisonSociale"
+                android:ems="10"
+                android:hint="@string/inscfo_raisonSociale"
+                android:inputType="textPersonName" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <Button
+                android:id="@+id/inscfoSubscribeBT"
+                android:layout_width="250dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="60dp"
+                android:background="#F1A14C"
+                android:gravity="center"
+                android:text="@string/inscfo_buttonSubscribe"
+                android:textColor="@android:color/white" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

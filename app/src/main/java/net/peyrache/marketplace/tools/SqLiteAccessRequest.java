@@ -23,7 +23,7 @@ public class SqLiteAccessRequest extends SQLiteOpenHelper {
                             +"email text not null,"
                             +"adresse text not null,"
                             +"type text not null,"
-                            +"paiement text not null,"
+                            +"paiement text,"
                             +"sexe integer,"
                             +"nom text,"
                             +"prenom text,"
@@ -39,7 +39,10 @@ public class SqLiteAccessRequest extends SQLiteOpenHelper {
 
     }
 
-    public void newUserAC(String username, String password, String email, String postalAddress, String type, String paiement, Integer sexe, String surname, String name, String rib){
+    public void newUserAC(String username, String password, String email, String postalAddress,
+                          String type, String paiement, Integer sexe, String surname,
+                          String name, String rib){
+
         username = username.replace("'","''");
         password = password.replace("'","''");
         email = email.replace("'","''");
@@ -47,6 +50,7 @@ public class SqLiteAccessRequest extends SQLiteOpenHelper {
         type = type.replace("'", "''");
         paiement = paiement.replace("'", "''");
         surname = surname.replace("'", "''");
+
         String strSql="INSERT INTO utilisateur(username, password, email, adresse, type, paiement, sexe, nom, prenom, rib) " +
                         "VALUES('"+username+"','"+password+"','"+email+"','"+postalAddress+"','"+type+"','"
                         +paiement+"','"+sexe+"','"+surname+"','"+name+"','"+rib+"')";
@@ -58,20 +62,22 @@ public class SqLiteAccessRequest extends SQLiteOpenHelper {
         }
     }
 
-    public void newUserFO(String username, String password, String email, String postalAddress, String type, String paiement, Integer sexe, String surname, String name, String rib, String raisonSociale){
+    public void newUserFO(String username, String password, String email, String postalAddress,
+                          String type, String rib, String raisonSociale){
+
         username = username.replace("'","''");
         password = password.replace("'","''");
         email = email.replace("'","''");
         postalAddress = postalAddress.replace("'","''");
         type = type.replace("'", "''");
-        paiement = paiement.replace("'", "''");
-        surname = surname.replace("'", "''");
-        String strSql="INSERT INTO utilisateur(username, password, email, adresse, type, paiement, sexe, nom, prenom, rib) " +
-                        "VALUES('"+username+"','"+password+"','"+email+"','"+postalAddress+"','"+type+"','"+paiement+"',"+sexe+",'" +
-                "       "+surname+"','"+name+"','"+rib+"','"+raisonSociale+"')";
+        rib = rib.replace("'", "''");
+        raisonSociale = raisonSociale.replace("'", "''");
+
+        String strSql="INSERT INTO utilisateur(username, password, email, adresse, type, rib, raisonSociale) " +
+                        "VALUES('"+username+"','"+password+"','"+email+"','"+postalAddress+"','"+type+"','"+rib+"','"+raisonSociale+"')";
         try{
             this.getWritableDatabase().execSQL(strSql);
-            Log.d("newUserFO", "Création du nouvel utilisateur réussite ! ");
+            Log.d("newUserFO", "Création d'un nouveau fournisseur effectuée ! ");
         }catch (Exception e){
             Log.d("newUserFO", "Erreur lors de l'execution de la requête");
         }
