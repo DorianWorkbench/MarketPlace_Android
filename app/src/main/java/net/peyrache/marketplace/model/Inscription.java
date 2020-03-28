@@ -11,6 +11,4 @@ abstract class Inscription {
     protected String inscEmail;
     protected String inscPostalAddress;
     protected String rib;
-
-
 }

@@ -7,4 +7,6 @@ abstract class Utilisateur {
     protected String postalAddress;
     protected String type;
     protected String rib;
+    protected Integer nUtilisateur;
+
 }

@@ -11,6 +11,8 @@ import android.widget.Toast;
 
 import net.peyrache.marketplace.R;
 import net.peyrache.marketplace.controller.CpageAccueil;
+import net.peyrache.marketplace.model.UtilisateurAc;
+import net.peyrache.marketplace.model.UtilisateurFo;
 
 import static android.text.TextUtils.isEmpty;
 
@@ -21,6 +23,7 @@ public class MainActivity extends AppCompatActivity {
     private Button connexionBT, inscriptionBT;
     private CpageAccueil controle;
     private Intent intent;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,7 +41,7 @@ public class MainActivity extends AppCompatActivity {
         this.passwordET= findViewById(R.id.passwordET);
         this.connexionBT= findViewById(R.id.connexionBT);
         this.inscriptionBT= findViewById(R.id.inscriptionBT);
-        this.controle = new CpageAccueil();
+        this.controle = new CpageAccueil(MainActivity.this);
         ecouteurBoutonConnexion();
         ecouteurBoutonInscription();
     }
@@ -55,24 +58,51 @@ public class MainActivity extends AppCompatActivity {
              */
             @Override
             public void onClick(View v) {
-                String username = MainActivity.this.usernameET.getText().toString();
-                String password= MainActivity.this.passwordET.getText().toString();
-                controle.getConnection(username, password);
 
-                if(controle.getVerifUser()){
-                    Toast.makeText(MainActivity.this, "Vous êtes connecté avec vos identifiant\nUtilisateur : "+controle.getUsername()+"\nMot de passe : "+controle.getPassword(), Toast.LENGTH_SHORT).show();
-                }else if (isEmpty(username) && isEmpty(password)|| isEmpty(username)||isEmpty(password)){
-                    Toast.makeText(MainActivity.this, "Remplissez correctement le formulaire", Toast.LENGTH_SHORT).show();
-                }else{
-                    Toast.makeText(MainActivity.this, "Erreur dans vos identifiants\nUtilisateur : " +controle.getUsername()+"\nMot de passe : "+controle.getPassword()+"\nVous êtes vous inscrit ?", Toast.LENGTH_SHORT).show();
+                // Initialisation des variables ayant pour valeur les données rentré par l'utilisateur une fois le bouton validé.
+                // La valeur récupérée est ici transtypée en type String.
+
+                String username = usernameET.getText().toString();
+                String password = passwordET.getText().toString();
+
+
+                //Vérification du type de l'utilisateur cherchant à se connecter.
+                String verif = controle.getTypeUser(username, password);
+
+                //Vérification du type d'utilisateur pour savoir quel Classe utilisateur instancier.
+                if (verif.equals("ac")){
+
+                    // Initialisation de la variable connexionAc pour facilité la récupération de données
+                    // (moins de choses à tapper)
+                    UtilisateurAc connexionAc = controle.getConnexionAC(username, password);
+
+                    // Initialisation des variables surname et name pour mettre la première lettre
+                    // de ces deux chaines de caractères en Capitale.
+                    String surname = connexionAc.getSurname().substring(0, 1).toUpperCase()+connexionAc.getSurname().substring(1);
+                    String name = connexionAc.getName().substring(0, 1).toUpperCase()+connexionAc.getName().substring(1);
+
+                    controle.newArticle(connexionAc.getIdUtilisateur(), "Boisson",connexionAc.getName(),
+                                    231234, 45, connexionAc.getSurname(),45);
+
+                    // Message de bienvenue.
+                    Toast.makeText(MainActivity.this, "Bienvenue "+surname+" "+name, Toast.LENGTH_SHORT).show();
+                }else if(verif.equals("fo")){
+                    String usernameFo = usernameET.getText().toString();
+                    String passwordFo = passwordET.getText().toString();
+
+
+                    UtilisateurFo connexionFo = controle.getConnexionFO(username, password);
+
+                    String raisonSociale = connexionFo.getRaisonSociale().substring(0, 1).toUpperCase()+connexionFo.getRaisonSociale().substring(1);
+
+                    Toast.makeText(MainActivity.this, "Bienvenue "+raisonSociale, Toast.LENGTH_SHORT).show();
                 }
             }
         });
     }
 
     /**
-     * Permet l'écoute du bouton inscription.
-     * Surcharge de la méthode onClick pour ouvrir l'activity InscriptionActivity
+     * Permet l'écoute du bouton "inscription" et ainsi la redirection sur la page d'inscription.
      */
     private void ecouteurBoutonInscription(){
         inscriptionBT.setOnClickListener(new Button.OnClickListener(){
@@ -85,4 +115,3 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 }
-

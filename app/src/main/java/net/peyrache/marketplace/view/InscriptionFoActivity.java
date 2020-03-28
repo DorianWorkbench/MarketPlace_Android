@@ -16,6 +16,7 @@ import net.peyrache.marketplace.model.InscriptionFo;
 
 public class InscriptionFoActivity extends AppCompatActivity {
 
+    //Initialisation des variables d'objets graphiques déclaré dans le dossier ressources.
     private EditText inscfoUsername, inscfoPassword, inscfoEmail,
                      inscfoPostalAddress, inscfoRib, inscfoRaisonSociale;
     private Button inscfoSubscribe;
@@ -30,6 +31,7 @@ public class InscriptionFoActivity extends AppCompatActivity {
         init();
     }
 
+    //Permet d'éviter d'encombrer le onCreate.
     private void init(){
         inscfoUsername=findViewById(R.id.inscfoUsernameET);
         inscfoPassword=findViewById(R.id.inscfoPasswordET);
@@ -38,7 +40,7 @@ public class InscriptionFoActivity extends AppCompatActivity {
         inscfoRib=findViewById(R.id.inscfoRibET);
         inscfoRaisonSociale=findViewById(R.id.inscfoRaisonSocialeET);
         inscfoSubscribe=findViewById(R.id.inscfoSubscribeBT);
-        inscriptionActivity= new CinscriptionActivity();
+        inscriptionActivity= new CinscriptionActivity(InscriptionFoActivity.this);
         ecouteurSubscribeBT();
     }
 
@@ -61,12 +63,17 @@ public class InscriptionFoActivity extends AppCompatActivity {
                         inscfoEmailSTR.isEmpty() || inscfoPostalAddressSTR.isEmpty() ||
                         inscfoRibSTR.isEmpty() || inscfoRaisonSocialeSTR.isEmpty())){
 
-                    inscriptionActivity.getSqlAccessResquest(InscriptionFoActivity.this);
-                    inscriptionActivity.getInscriptionInstanceFo(inscfoUsernameSTR, inscfoPasswordSTR, inscfoEmailSTR, inscfoPostalAddressSTR, inscfoRibSTR, inscfoRaisonSocialeSTR);
-                    Toast.makeText(InscriptionFoActivity.this, "Vous vous êtes bien enregistré", Toast.LENGTH_SHORT).show();
-                    intent= new Intent(InscriptionFoActivity.this, MainActivity.class);
-                    startActivity(intent);
+                    if(inscriptionActivity.utilExist(inscfoUsernameSTR)){
 
+                        inscriptionActivity.getInscriptionInstanceFo(inscfoUsernameSTR, inscfoPasswordSTR, inscfoEmailSTR, inscfoPostalAddressSTR, inscfoRibSTR, inscfoRaisonSocialeSTR);
+                        Toast.makeText(InscriptionFoActivity.this, "Vous vous êtes bien enregistré", Toast.LENGTH_SHORT).show();
+
+                        intent= new Intent(InscriptionFoActivity.this, MainActivity.class);
+                        startActivity(intent);
+
+                    }else{
+                        Toast.makeText(InscriptionFoActivity.this, "Le nom d'utilisateur existe déjà", Toast.LENGTH_SHORT).show();
+                    }
                 }else{
                     Toast.makeText(InscriptionFoActivity.this, "Veuillez rentrer des informations valides", Toast.LENGTH_SHORT).show();
                 }

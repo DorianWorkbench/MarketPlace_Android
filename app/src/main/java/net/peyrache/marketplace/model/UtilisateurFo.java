@@ -13,4 +13,22 @@ public class UtilisateurFo extends Utilisateur{
         this.rib=rib;
         this.raisonSociale=raisonSociale;
     }
+    public String getUsername(){
+        return this.username;
+    }
+    public String getPassword(){
+        return this.password;
+    }
+    public String getEmail(){
+        return this.email;
+    }
+    public String getPostalAddress(){
+        return this.postalAddress;
+    }
+    public String getRib(){
+        return this.rib;
+    }
+    public String getRaisonSociale(){
+        return this.raisonSociale;
+    }
 }

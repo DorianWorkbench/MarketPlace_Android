@@ -7,7 +7,7 @@ public class UtilisateurAc extends Utilisateur {
     private Integer sexe;
     private String paiement;
 
-    public UtilisateurAc(String username, String password, String email, String postalAddress, String rib,String surname, String name, Integer sexe, String paiement) {
+    public UtilisateurAc(String username, String password, String email, String postalAddress, String rib,String surname, String name, Integer sexe, String paiement, Integer nUtilisateur) {
         this.surname = surname;
         this.name = name;
         this.sexe = sexe;
@@ -18,22 +18,41 @@ public class UtilisateurAc extends Utilisateur {
         this.postalAddress=postalAddress;
         this.rib = rib;
         this.type="ac";
+        this.nUtilisateur = nUtilisateur;
+    }
+
+    public String getUsername(){
+        return this.username;
+    }
+
+    public String getPassword(){
+        return this.password;
+    }
+
+    public String getEmail(){
+        return this.email;
+    }
+    public String getPostalAddress(){
+        return this.postalAddress;
+    }
+    public String getRib(){
+        return this.rib;
     }
 
     public String getSurname() {
-        return surname;
+        return this.surname;
     }
 
     public String getName() {
-        return name;
+        return this.name;
     }
 
     public Integer getSexe() {
-        return sexe;
+        return this.sexe;
     }
 
     public String getPaiement() {
-        return paiement;
+        return this.paiement;
     }
 
     public void setSurname(String surname) {
@@ -43,6 +62,11 @@ public class UtilisateurAc extends Utilisateur {
     public void setPaiement(String paiement) {
         this.paiement = paiement;
     }
+
+    public Integer getIdUtilisateur(){
+        return this.nUtilisateur;
+    }
+
 
 
 }

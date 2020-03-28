@@ -23,21 +23,28 @@
     <autoscroll-to-editor value="false" />
     <autoscroll-from-editor value="true" />
     <show-object-properties value="true" />
-    <loaded-nodes />
+    <loaded-nodes>
+      <connection connection-id="66c84f80-cce7-4c9a-bd50-352173e3ce16">
+        <schema name="main" object-types="column, dataset trigger, table, index, view, constraint" />
+      </connection>
+    </loaded-nodes>
   </component>
   <component name="DBNavigator.Project.DatabaseConsoleManager">
-    <connection id="9ded7245-8c22-4ade-a4be-61d3dd7d9ff3">
-      <console name="marketplace" type="STANDARD" schema="main" session="Main" />
+    <connection id="66c84f80-cce7-4c9a-bd50-352173e3ce16">
+      <console name="Connection" type="STANDARD" schema="main" session="Main" />
     </connection>
   </component>
   <component name="DBNavigator.Project.DatabaseFileManager">
-    <open-files />
+    <open-files>
+      <object connection-id="66c84f80-cce7-4c9a-bd50-352173e3ce16" object-ref="schemas/main/tables/utilisateur" />
+    </open-files>
   </component>
   <component name="DBNavigator.Project.DatabaseSessionManager">
-    <connection id="9ded7245-8c22-4ade-a4be-61d3dd7d9ff3" />
+    <connection id="66c84f80-cce7-4c9a-bd50-352173e3ce16" />
   </component>
   <component name="DBNavigator.Project.DatasetFilterManager">
-    <filter-actions connection-id="9ded7245-8c22-4ade-a4be-61d3dd7d9ff3" dataset="main.utilisateur" active-filter-id="EMPTY_FILTER" />
+    <filter-actions connection-id="66c84f80-cce7-4c9a-bd50-352173e3ce16" dataset="main.article" active-filter-id="EMPTY_FILTER" />
+    <filter-actions connection-id="66c84f80-cce7-4c9a-bd50-352173e3ce16" dataset="main.utilisateur" active-filter-id="EMPTY_FILTER" />
   </component>
   <component name="DBNavigator.Project.EditorStateManager">
     <last-used-providers />
@@ -62,10 +69,10 @@
   </component>
   <component name="DBNavigator.Project.Settings">
     <connections>
-      <connection id="9ded7245-8c22-4ade-a4be-61d3dd7d9ff3" active="true">
+      <connection id="66c84f80-cce7-4c9a-bd50-352173e3ce16" active="true">
         <database>
-          <name value="marketplace" />
-          <description value="dbMarketplace" />
+          <name value="Connection" />
+          <description value="" />
           <database-type value="SQLITE" />
           <config-type value="BASIC" />
           <database-version value="3.21" />
