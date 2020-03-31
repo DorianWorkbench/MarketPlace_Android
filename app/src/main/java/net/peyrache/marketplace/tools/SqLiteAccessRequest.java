@@ -5,9 +5,6 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
-
-import androidx.annotation.Nullable;
-
 import net.peyrache.marketplace.model.UtilisateurAc;
 import net.peyrache.marketplace.model.UtilisateurFo;
 
@@ -58,7 +55,9 @@ public class SqLiteAccessRequest extends SQLiteOpenHelper {
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
 
     }
+    //region Utilisateur
 
+    //region Inscritpion utilisateur
     /**
      * Création d'un nouvel utilisateur de type Acheteur, cette méthode sera appelée dans le controller Cinscription
      * @param username
@@ -135,6 +134,38 @@ public class SqLiteAccessRequest extends SQLiteOpenHelper {
             Log.d("newUserFO", "Erreur lors de l'execution de la requête");
         }
     }
+    /**
+     * Permet de vérifier si l'utilisateur existe avant de créer un utilisateur.
+     * @param username
+     * @return
+     */
+    public boolean utilExist(String username){
+        Boolean result=true;
+        String strSql = "SELECT username FROM utilisateur WHERE username='"+username+"'";
+
+        Cursor cursor = this.getReadableDatabase().rawQuery(strSql, null);
+        cursor.moveToFirst();
+
+        while(!(cursor.isAfterLast())){
+            if(cursor.getString(0).isEmpty()){
+
+                Log.d("Existe", "L'utilisateur n'existe pas");
+
+                result = true;
+                return result;
+            }else{
+
+                Log.d("Existe", "L'utilisateur existe");
+
+                result = false;
+                return result;
+            }
+        }
+        return result;
+    }
+    //endregion
+
+    //region Connexion utilisateur
 
     /**
      * Permet de vérifier le type d'utilisateur suivant le nom d'utilisateur et le mot de passe.
@@ -192,26 +223,9 @@ public class SqLiteAccessRequest extends SQLiteOpenHelper {
         Log.d("UtilisateurFoConnexion", "Pas connecté");
         return null;
     }
+    //endregion
 
-    public void articleAdd( Integer idUtilisateur, String cat, String nomArticle, Integer ean, Integer prix,
-                            String description, Integer stock){
-
-        cat = cat.replace("'","''");
-        nomArticle = nomArticle.replace("'","''");
-        description = description.replace("'", "''");
-
-        String strSql="INSERT INTO article(cat, description, ean, idUtilisateur, nomArticle, prix, stock) " +
-                "VALUES('"+cat+"','"+description+"',"+ean+","+idUtilisateur+",'"+nomArticle+"',"+prix+","+stock+")";
-        try{
-            //Test si la requête peut bien s'exécuter
-            this.getWritableDatabase().execSQL(strSql);
-            Log.d("articleAdd", "Création d'un nouvel article effectué !");
-        }catch (Exception e){
-            //Erreur renvoyé en cas de problème lors de l'exécution de la requête.
-            Log.d("articleAdd", "Erreur lors de l'execution de la requête");
-        }
-    }
-
+    //region Update profil utilisateur
     /**
      * Permet l'update d'un profil utilisateur de type "Acheteur".
      * @param username
@@ -224,7 +238,7 @@ public class SqLiteAccessRequest extends SQLiteOpenHelper {
      * @param rib
      */
     public void updateProfilAc(String username, String password, String email, String adresse, Integer sexe,
-                             String nom, String prenom, String rib){
+                               String nom, String prenom, String rib){
 
         password = password.replace("'","''");
         email = email.replace("'","''");
@@ -235,14 +249,14 @@ public class SqLiteAccessRequest extends SQLiteOpenHelper {
         username = username.replace("'","''");
 
         String strSql = "UPDATE utilisateur" +
-                        "SET password = '"+password+"'," +
-                        "email = '"+email+"'," +
-                        "adresse = '"+adresse+"'," +
-                        "sexe = "+sexe+"," +
-                        "nom = '"+nom+"'," +
-                        "prenom = '"+prenom+"'," +
-                        "rib = '"+rib+"'" +
-                        "WHERE username = '"+username+"'";
+                "SET password = '"+password+"'," +
+                "email = '"+email+"'," +
+                "adresse = '"+adresse+"'," +
+                "sexe = "+sexe+"," +
+                "nom = '"+nom+"'," +
+                "prenom = '"+prenom+"'," +
+                "rib = '"+rib+"'" +
+                "WHERE username = '"+username+"'";
         try{
             this.getWritableDatabase().execSQL(strSql);
             Log.d("modifUtilAc", "Effectué");
@@ -272,34 +286,83 @@ public class SqLiteAccessRequest extends SQLiteOpenHelper {
             Log.d("modifUtilFo", "Echec de requête");
         }
     }
+    //endregion
+
+    //endregion
+
+    //region Article
 
     /**
-     * Permet de vérifier si l'utilisateur existe avant de créer un utilisateur.
-     * @param username
-     * @return
+     * Permet d'update si l'article existe sinon insert.
+     * A tester.
+     * @param idUtilisateur
+     * @param cat
+     * @param nomArticle
+     * @param ean
+     * @param prix
+     * @param description
+     * @param quantite
      */
-    public boolean utilExist(String username){
-        Boolean result=true;
-        String strSql = "SELECT username FROM utilisateur WHERE username='"+username+"'";
+    public void articleAdd( Integer idUtilisateur, String cat, String nomArticle, Integer ean, Integer prix,
+                            String description, Integer quantite){
 
-        Cursor cursor = this.getReadableDatabase().rawQuery(strSql, null);
+        cat = cat.replace("'","''");
+        nomArticle = nomArticle.replace("'","''");
+        description = description.replace("'", "''");
+
+        String strSqlVerif = "SELECT nomArticle FROM article WHERE nomArticle = '"+nomArticle+"'";
+
+        Cursor cursor = this.getWritableDatabase().rawQuery(strSqlVerif, null);
         cursor.moveToFirst();
 
         while(!(cursor.isAfterLast())){
-            if(cursor.getString(0).isEmpty()){
 
-                Log.d("Existe", "L'utilisateur n'existe pas");
+            if(cursor.getString(0).equals(nomArticle)){
 
-                result = true;
-                return result;
+                try{
+
+                    String strSqlAdd = "UPDATE article SET stock="+quantite+" WHERE nomArticle='"+nomArticle+"'";
+                    this.getWritableDatabase().execSQL(strSqlAdd);
+                    Log.d("remplArticle", "Vous avez ajouté à votre stock");
+
+                }catch(Exception e){
+
+                    Log.d("remplArticle", "Erreur lors de l'execution de la requête");
+
+                }
             }else{
 
-                Log.d("Existe", "L'utilisateur existe");
+                String strSql="INSERT INTO article(cat, description, ean, idUtilisateur, nomArticle, prix, stock) " +
+                        "VALUES('"+cat+"','"+description+"',"+ean+","+idUtilisateur+",'"+nomArticle+"',"+prix+","+quantite+")";
+                try{
+                    //Test si la requête peut bien s'exécuter
+                    this.getWritableDatabase().execSQL(strSql);
+                    Log.d("articleAdd", "Création d'un nouvel article effectué !");
+                }catch (Exception e){
+                    //Erreur renvoyé en cas de problème lors de l'exécution de la requête.
+                    Log.d("articleAdd", "Erreur lors de l'execution de la requête");
+                }
 
-                result = false;
-                return result;
             }
         }
-        return result;
     }
+
+    public void articleSuppr(String nomArticle){
+        nomArticle = nomArticle.replace("'","''");
+
+        String strSql = "DELETE FROM article WHERE nomArticle='"+nomArticle+"'";
+        try{
+            this.getWritableDatabase().execSQL(strSql);
+            Log.d("supprArticle", "Suppression effectuée");
+        }catch (Exception e){
+            Log.d("supprArticle", "Echec lors de l'exécution de la requête sql");
+        }
+    }
+
+    public void articleAjout(String nomArticle){
+
+        nomArticle=nomArticle.replace("'","''");
+
+    }
+    //endregion
 }

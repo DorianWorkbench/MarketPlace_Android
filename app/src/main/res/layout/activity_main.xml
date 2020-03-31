@@ -19,6 +19,7 @@
             android:orientation="vertical">
 
             <TextView
+                android:id="@+id/tvConnexion"
                 android:layout_width="match_parent"
                 android:layout_height="136dp"
                 android:gravity="center"

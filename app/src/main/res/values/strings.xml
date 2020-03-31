@@ -26,4 +26,13 @@
     <string name="inscfo_rib">Rib</string>
     <string name="inscfo_raisonSociale">Raison sociale</string>
     <string name="inscfo_buttonSubscribe">S\'inscrire</string>
+
+
+    <string name="home">Home</string>
+    <string name="basket">Basket</string>
+    <string name="account">Account</string>
+
+    <string name="home_fo">Home</string>
+    <string name="add">Add</string>
+    <string name="account_fo">Account</string>
 </resources>

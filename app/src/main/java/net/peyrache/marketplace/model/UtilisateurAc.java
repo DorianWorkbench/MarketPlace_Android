@@ -1,6 +1,9 @@
 package net.peyrache.marketplace.model;
 
-public class UtilisateurAc extends Utilisateur {
+import android.os.Parcel;
+import android.os.Parcelable;
+
+public class UtilisateurAc extends Utilisateur implements Parcelable {
 
     private String surname;
     private String name;
@@ -67,6 +70,56 @@ public class UtilisateurAc extends Utilisateur {
         return this.nUtilisateur;
     }
 
+    protected UtilisateurAc(Parcel in) {
+        username = in.readString();
+        password = in.readString();
+        email = in.readString();
+        postalAddress = in.readString();
+        rib = in.readString();
+        surname = in.readString();
+        name = in.readString();
+        if (in.readByte() == 0) {
+            sexe = null;
+        } else {
+            sexe = in.readInt();
+        }
+        paiement = in.readString();
 
+        if (in.readByte() == 0) {
+            nUtilisateur = null;
+        } else {
+            nUtilisateur = in.readInt();
+        }
+    }
 
+    public static final Creator<UtilisateurAc> CREATOR = new Creator<UtilisateurAc>() {
+        @Override
+        public UtilisateurAc createFromParcel(Parcel in) {
+            return new UtilisateurAc(in);
+        }
+
+        @Override
+        public UtilisateurAc[] newArray(int size) {
+            return new UtilisateurAc[size];
+        }
+    };
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(this.username);
+        dest.writeString(this.password);
+        dest.writeString(this.email);
+        dest.writeString(this.postalAddress);
+        dest.writeString(this.rib);
+        dest.writeString(this.surname);
+        dest.writeString(this.name);
+        dest.writeInt(this.sexe);
+        dest.writeString(this.paiement);
+        dest.writeInt(this.nUtilisateur);
+
+    }
 }

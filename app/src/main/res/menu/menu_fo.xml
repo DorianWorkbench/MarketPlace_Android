@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/nav_home_fo"
+        android:icon="@drawable/ic_home_black_24dp"
+        android:title="@string/home_fo"
+    />
+    <item
+        android:id="@+id/add"
+        android:icon="@drawable/ic_add_circle_black_24dp"
+        android:title="@string/add"
+    />
+    <item
+        android:id="@+id/profil_fo"
+        android:icon="@drawable/ic_account_circle_black_24dp"
+        android:title="@string/account_fo"
+    />
+</menu>

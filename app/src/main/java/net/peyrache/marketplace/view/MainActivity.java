@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import net.peyrache.marketplace.R;
@@ -22,8 +23,8 @@ public class MainActivity extends AppCompatActivity {
     private EditText usernameET, passwordET;
     private Button connexionBT, inscriptionBT;
     private CpageAccueil controle;
-    private Intent intent;
-
+    private Intent intent, intent_utilAc, intent_utilFo;
+    private TextView text;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,6 +42,8 @@ public class MainActivity extends AppCompatActivity {
         this.passwordET= findViewById(R.id.passwordET);
         this.connexionBT= findViewById(R.id.connexionBT);
         this.inscriptionBT= findViewById(R.id.inscriptionBT);
+        this.text=findViewById(R.id.tvConnexion);
+        text.setText("Coucou");
         this.controle = new CpageAccueil(MainActivity.this);
         ecouteurBoutonConnexion();
         ecouteurBoutonInscription();
@@ -81,11 +84,14 @@ public class MainActivity extends AppCompatActivity {
                     String surname = connexionAc.getSurname().substring(0, 1).toUpperCase()+connexionAc.getSurname().substring(1);
                     String name = connexionAc.getName().substring(0, 1).toUpperCase()+connexionAc.getName().substring(1);
 
-                    controle.newArticle(connexionAc.getIdUtilisateur(), "Boisson",connexionAc.getName(),
-                                    231234, 45, connexionAc.getSurname(),45);
-
                     // Message de bienvenue.
                     Toast.makeText(MainActivity.this, "Bienvenue "+surname+" "+name, Toast.LENGTH_SHORT).show();
+
+                    //Redirection MainActivity utilisateurAc
+                    intent_utilAc=new Intent(MainActivity.this, UtilisateurAcPages.class);
+                    intent_utilAc.putExtra("utilisateur", connexionAc);
+                    startActivity(intent_utilAc);
+
                 }else if(verif.equals("fo")){
                     String usernameFo = usernameET.getText().toString();
                     String passwordFo = passwordET.getText().toString();
@@ -94,8 +100,12 @@ public class MainActivity extends AppCompatActivity {
                     UtilisateurFo connexionFo = controle.getConnexionFO(username, password);
 
                     String raisonSociale = connexionFo.getRaisonSociale().substring(0, 1).toUpperCase()+connexionFo.getRaisonSociale().substring(1);
-
                     Toast.makeText(MainActivity.this, "Bienvenue "+raisonSociale, Toast.LENGTH_SHORT).show();
+                    intent_utilFo = new Intent(MainActivity.this, UtilisateurFoPages.class);
+                    intent_utilFo.putExtra("utilisateurFo", connexionFo);
+                    startActivity(intent_utilFo);
+                }else{
+                    Toast.makeText(MainActivity.this, "Erreur dans les identifiants", Toast.LENGTH_SHORT).show();
                 }
             }
         });
