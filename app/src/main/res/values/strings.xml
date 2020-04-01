@@ -35,4 +35,12 @@
     <string name="home_fo">Home</string>
     <string name="add">Add</string>
     <string name="account_fo">Account</string>
+
+    <string name="rs_util_fo">Raison sociale</string>
+    <string name="rib_util_fo">Rib</string>
+    <string name="addr_util_fo">Adresse Postale</string>
+    <string name="pass_util_fo">Mot de passe</string>
+    <string name="mail_util_fo">Email</string>
+    <string name="modif_util_fo">Modifier</string>
+    <string name="lbl_modif_utilFo">Mettre à jour le profil</string>
 </resources>

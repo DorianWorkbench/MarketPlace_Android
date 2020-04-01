@@ -27,7 +27,8 @@
   </component>
   <component name="DBNavigator.Project.DatabaseConsoleManager">
     <connection id="66c84f80-cce7-4c9a-bd50-352173e3ce16">
-      <console name="Connection" type="STANDARD" schema="main" session="Main" />
+      <console name="Connection" type="STANDARD" schema="main" session="Main"><![CDATA[UPDATE utilisateur SET password = 'password', email = 'email', adresse = 'adresse', rib = 'rib', 
+                        raisonSociale ='raisonSociale' WHERE username = 'dorian';]]></console>
     </connection>
   </component>
   <component name="DBNavigator.Project.DatabaseFileManager">

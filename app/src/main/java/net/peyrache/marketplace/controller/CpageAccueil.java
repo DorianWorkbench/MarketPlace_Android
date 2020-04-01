@@ -48,13 +48,12 @@ public class CpageAccueil {
     /**
      * Récupération de l'objet utilisateur de type "fournisseur" permettant l'accès à ses attributs.
      * @param username
-     * @param password
      */
-    public UtilisateurFo getConnexionFO(String username, String password){
+    public UtilisateurFo getConnexionFO(String username){
         //Ouverture d'une connexion à la base de données.
         sqLiteAccessRequest= new SqLiteAccessRequest(context);
 
-        UtilisateurFo user = sqLiteAccessRequest.connexionFo(username, password);
+        UtilisateurFo user = sqLiteAccessRequest.connexionFo(username);
         sqLiteAccessRequest.close();
         return user;
     }

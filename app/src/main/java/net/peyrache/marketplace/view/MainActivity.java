@@ -97,7 +97,7 @@ public class MainActivity extends AppCompatActivity {
                     String passwordFo = passwordET.getText().toString();
 
 
-                    UtilisateurFo connexionFo = controle.getConnexionFO(username, password);
+                    UtilisateurFo connexionFo = controle.getConnexionFO(username);
 
                     String raisonSociale = connexionFo.getRaisonSociale().substring(0, 1).toUpperCase()+connexionFo.getRaisonSociale().substring(1);
                     Toast.makeText(MainActivity.this, "Bienvenue "+raisonSociale, Toast.LENGTH_SHORT).show();

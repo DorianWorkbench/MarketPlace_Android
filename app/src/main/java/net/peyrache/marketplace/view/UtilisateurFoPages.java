@@ -6,11 +6,14 @@ import androidx.fragment.app.Fragment;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import net.peyrache.marketplace.R;
+import net.peyrache.marketplace.controller.CpageAccueil;
+import net.peyrache.marketplace.controller.CutilFo;
 import net.peyrache.marketplace.model.UtilisateurFo;
 
 public class UtilisateurFoPages extends AppCompatActivity {
@@ -28,10 +31,11 @@ public class UtilisateurFoPages extends AppCompatActivity {
     }
 
     private void init(){
+
         bottomNavigationFo=findViewById(R.id.container_items_bottom_fo);
-        ecouteurBottomNavigationFo();
         intentFo=getIntent();
         utilisateurFo = intentFo.getParcelableExtra("utilisateurFo");
+        ecouteurBottomNavigationFo();
     }
 
     private void ecouteurBottomNavigationFo() {
@@ -48,7 +52,7 @@ public class UtilisateurFoPages extends AppCompatActivity {
                         currentFragment = new Fragment_Add_UtilFo();
                         break;
                     case R.id.profil_fo:
-                        currentFragment = new Fragment_Account_UtilFo();
+                        currentFragment = new Fragment_Account_UtilFo(utilisateurFo);
                         break;
                 }
 

@@ -204,12 +204,11 @@ public class SqLiteAccessRequest extends SQLiteOpenHelper {
         Log.d("UtilisateurCoAC", "Pas créé");
         return null;
     }
-    public UtilisateurFo connexionFo(String username, String password){
+    public UtilisateurFo connexionFo(String username){
 
         UtilisateurFo utilisateur;
 
-        String strSql = "SELECT username, password, email, adresse, rib, raisonSociale FROM utilisateur WHERE username = '"+username+"'" +
-                        "AND password = '"+password+"'";
+        String strSql = "SELECT username, password, email, adresse, rib, raisonSociale FROM utilisateur WHERE username = '"+username+"'";
         Cursor cursor = this.getReadableDatabase().rawQuery(strSql, null);
         cursor.moveToFirst();
 
@@ -271,14 +270,10 @@ public class SqLiteAccessRequest extends SQLiteOpenHelper {
         adresse = adresse.replace("'","''");
         rib = rib.replace("'","''");
         username = username.replace("'","''");
+        raisonSociale = raisonSociale.replace("'","''");
 
-        String strSql = "UPDATE utilisateur" +
-                "SET password = '"+password+"'," +
-                "email = '"+email+"'," +
-                "adresse = '"+adresse+"'," +
-                "rib = '"+rib+"'" +
-                "raisonSociale ='"+raisonSociale+"',"+
-                "WHERE username = '"+username+"'";
+        String strSql = "UPDATE utilisateur SET password ='"+password+"', email='"+email+"', adresse='"+adresse+"'" +
+                        ", rib='"+rib+"', raisonSociale='"+raisonSociale+"' WHERE username='"+username+"'";
         try{
             this.getWritableDatabase().execSQL(strSql);
             Log.d("modifUtilFo", "Effectué");
@@ -365,4 +360,6 @@ public class SqLiteAccessRequest extends SQLiteOpenHelper {
 
     }
     //endregion
+
+
 }
