@@ -49,7 +49,7 @@ public class UtilisateurFoPages extends AppCompatActivity {
                         currentFragment = new Fragment_Home_UtilFo();
                         break;
                     case R.id.add:
-                        currentFragment = new Fragment_Add_UtilFo();
+                        currentFragment = new Fragment_Add_UtilFo(utilisateurFo);
                         break;
                     case R.id.profil_fo:
                         currentFragment = new Fragment_Account_UtilFo(utilisateurFo);

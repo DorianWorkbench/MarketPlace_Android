@@ -7,7 +7,7 @@ public class UtilisateurFo extends Utilisateur implements Parcelable {
 
     private String raisonSociale;
 
-    public UtilisateurFo(String username, String password, String email, String postalAddress, String rib, String raisonSociale) {
+    public UtilisateurFo(Integer nUtilisateur, String username, String password, String email, String postalAddress, String rib, String raisonSociale) {
         this.username=username;
         this.password=password;
         this.email=email;
@@ -15,8 +15,11 @@ public class UtilisateurFo extends Utilisateur implements Parcelable {
         this.type="fo";
         this.rib=rib;
         this.raisonSociale=raisonSociale;
+        this.nUtilisateur = nUtilisateur;
     }
-
+    public Integer getnUtilisateur() {
+        return this.nUtilisateur;
+    }
     public String getUsername(){
         return this.username;
     }
@@ -37,6 +40,7 @@ public class UtilisateurFo extends Utilisateur implements Parcelable {
     }
 
     protected UtilisateurFo(Parcel in) {
+        nUtilisateur = in.readInt();
         username = in.readString();
         password = in.readString();
         email = in.readString();
@@ -64,6 +68,7 @@ public class UtilisateurFo extends Utilisateur implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
+        dest.writeInt(this.nUtilisateur);
         dest.writeString(this.username);
         dest.writeString(this.password);
         dest.writeString(this.email);

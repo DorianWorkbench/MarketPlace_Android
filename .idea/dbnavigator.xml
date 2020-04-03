@@ -23,12 +23,15 @@
     <autoscroll-to-editor value="false" />
     <autoscroll-from-editor value="true" />
     <show-object-properties value="true" />
-    <loaded-nodes />
+    <loaded-nodes>
+      <connection connection-id="66c84f80-cce7-4c9a-bd50-352173e3ce16">
+        <schema name="main" object-types="table, view, index, constraint, column, dataset trigger" />
+      </connection>
+    </loaded-nodes>
   </component>
   <component name="DBNavigator.Project.DatabaseConsoleManager">
     <connection id="66c84f80-cce7-4c9a-bd50-352173e3ce16">
-      <console name="Connection" type="STANDARD" schema="main" session="Main"><![CDATA[UPDATE utilisateur SET password = 'password', email = 'email', adresse = 'adresse', rib = 'rib', 
-                        raisonSociale ='raisonSociale' WHERE username = 'dorian';]]></console>
+      <console name="Connection" type="STANDARD" schema="main" session="Main"><![CDATA[SELECT nomArticle FROM article, utilisateur WHERE article.idUtilisateur = utilisateur.idUtilisateur AND nomArticle = 'petibulle' AND article.idUtilisateur = 1;]]></console>
     </connection>
   </component>
   <component name="DBNavigator.Project.DatabaseFileManager">
@@ -40,6 +43,7 @@
   <component name="DBNavigator.Project.DatasetFilterManager">
     <filter-actions connection-id="66c84f80-cce7-4c9a-bd50-352173e3ce16" dataset="main.article" active-filter-id="EMPTY_FILTER" />
     <filter-actions connection-id="66c84f80-cce7-4c9a-bd50-352173e3ce16" dataset="main.utilisateur" active-filter-id="EMPTY_FILTER" />
+    <filter-actions connection-id="66c84f80-cce7-4c9a-bd50-352173e3ce16" dataset="main.categorie" active-filter-id="EMPTY_FILTER" />
   </component>
   <component name="DBNavigator.Project.EditorStateManager">
     <last-used-providers />

@@ -9,7 +9,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".view.UtilisateurFoPages"></activity>
+        <activity android:name=".view.UtilisateurFoPages" android:windowSoftInputMode="adjustPan|stateHidden"></activity>
         <activity android:name=".view.UtilisateurAcPages" />
         <activity android:name=".view.InscriptionFoActivity" />
         <activity android:name=".view.InscriptionActivity" />

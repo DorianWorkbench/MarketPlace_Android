@@ -43,4 +43,10 @@
     <string name="mail_util_fo">Email</string>
     <string name="modif_util_fo">Modifier</string>
     <string name="lbl_modif_utilFo">Mettre à jour le profil</string>
+    <string name="ajout_article">Ajoutez un article</string>
+    <string name="EtAddFo">Nom Article</string>
+    <string name="addArticleUtilFo">Ajout</string>
+    <string name="prix_util_fo_art">Prix</string>
+    <string name="qte_utilfo_art">Qte</string>
+    <string name="desc_utilfo_art">Description</string>
 </resources>

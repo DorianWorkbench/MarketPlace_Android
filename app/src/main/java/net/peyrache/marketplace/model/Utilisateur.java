@@ -9,4 +9,5 @@ abstract class Utilisateur {
     protected String rib;
     protected Integer nUtilisateur;
 
+
 }

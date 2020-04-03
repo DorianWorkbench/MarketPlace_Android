@@ -33,15 +33,14 @@ public class CpageAccueil {
     /**
      * Récupération de l'objet utilisateur de type "acheteur" permettant l'accès à ses attributs.
      * @param username
-     * @param password
      */
-    public UtilisateurAc getConnexionAC(String username, String password){
+    public UtilisateurAc getConnexionAC(String username){
 
         //Ouverture d'une connexion à la base de données.
         sqLiteAccessRequest= new SqLiteAccessRequest(context);
 
         //Récupération de l'objet utilisateur de la méthode connexionAC de l'outil SqLiteAccessRequest
-        UtilisateurAc utilisateur = sqLiteAccessRequest.connexionAC(username, password);
+        UtilisateurAc utilisateur = sqLiteAccessRequest.connexionAC(username);
         sqLiteAccessRequest.close();
         return utilisateur;
     }
@@ -56,26 +55,6 @@ public class CpageAccueil {
         UtilisateurFo user = sqLiteAccessRequest.connexionFo(username);
         sqLiteAccessRequest.close();
         return user;
-    }
-
-    /**
-     * Création d'un nouvel article.
-     * @param idUtilisateur
-     * @param cat
-     * @param nomArticle
-     * @param ean
-     * @param prix
-     * @param description
-     * @param stock
-     */
-    public void newArticle(Integer idUtilisateur, String cat, String nomArticle, Integer ean,
-                           Integer prix, String description, Integer stock){
-        //Ouverture d'une connexion à la base de données.
-        sqLiteAccessRequest= new SqLiteAccessRequest(context);
-        //Ajout d'un article.
-        sqLiteAccessRequest.articleAdd(idUtilisateur,cat, nomArticle, ean, prix,
-                            description, stock);
-        sqLiteAccessRequest.close();
     }
 }
 

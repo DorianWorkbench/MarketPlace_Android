@@ -5,21 +5,19 @@ public class article {
     private Integer idUtilisateur;
     private String cat;
     private String nomArticle;
-    private Integer ean;
-    private Integer prix;
+    private Float prix;
     private String description;
-    private Integer stock;
+    private Integer qte;
 
-    public article(Integer idUtilisateur, String cat, String nomArticle, Integer ean,
-                   Integer prix, String description, Integer stock) {
+    public article(Integer idUtilisateur, String cat, String nomArticle,
+                   Float prix, String description, Integer qte) {
 
         this.idUtilisateur = idUtilisateur;
         this.cat = cat;
         this.nomArticle = nomArticle;
-        this.ean = ean;
         this.prix = prix;
         this.description = description;
-        this.stock = stock;
+        this.qte = qte;
     }
 
     public String getCat() {
@@ -30,7 +28,7 @@ public class article {
         return nomArticle;
     }
 
-    public Integer getPrix() {
+    public Float getPrix() {
         return prix;
     }
 
@@ -38,7 +36,11 @@ public class article {
         return description;
     }
 
-    public Integer getStock() {
-        return stock;
+    public Integer getQte() {
+        return this.qte;
+    }
+
+    public Integer setIdUtilisateur(Integer idUtilisateur){
+        return this.idUtilisateur = idUtilisateur;
     }
 }

@@ -43,7 +43,6 @@ public class MainActivity extends AppCompatActivity {
         this.connexionBT= findViewById(R.id.connexionBT);
         this.inscriptionBT= findViewById(R.id.inscriptionBT);
         this.text=findViewById(R.id.tvConnexion);
-        text.setText("Coucou");
         this.controle = new CpageAccueil(MainActivity.this);
         ecouteurBoutonConnexion();
         ecouteurBoutonInscription();
@@ -77,7 +76,7 @@ public class MainActivity extends AppCompatActivity {
 
                     // Initialisation de la variable connexionAc pour facilité la récupération de données
                     // (moins de choses à tapper)
-                    UtilisateurAc connexionAc = controle.getConnexionAC(username, password);
+                    UtilisateurAc connexionAc = controle.getConnexionAC(username);
 
                     // Initialisation des variables surname et name pour mettre la première lettre
                     // de ces deux chaines de caractères en Capitale.
