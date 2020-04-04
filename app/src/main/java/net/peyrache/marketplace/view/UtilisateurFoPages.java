@@ -46,7 +46,7 @@ public class UtilisateurFoPages extends AppCompatActivity {
 
                 switch (item.getItemId()){
                     case R.id.nav_home_fo:
-                        currentFragment = new Fragment_Home_UtilFo();
+                        currentFragment = new Fragment_Home_UtilFo(utilisateurFo);
                         break;
                     case R.id.add:
                         currentFragment = new Fragment_Add_UtilFo(utilisateurFo);

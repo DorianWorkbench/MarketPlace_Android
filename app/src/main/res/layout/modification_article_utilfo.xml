@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="#14B1A4">
+    <TextView
+        android:id="@+id/LblModificationArticle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Modifiez votre article"
+        android:gravity="center"
+        android:textColor="#FFFFFF"
+        android:textSize="30sp"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="60dp"
+    />
+
+    <TextView
+        android:id="@+id/LblArticle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Nom article"
+        android:textColor="#FFFFFF"
+        android:textSize="25sp"
+        android:layout_below="@+id/LblModificationArticle"
+        android:layout_marginTop="60dp"
+        android:layout_centerHorizontal="true"/>
+
+    <EditText
+        android:id="@+id/modif_descArticle_utilFo"
+        android:inputType="textMultiLine"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:textColor="#FFFFFF"
+        android:hint="Description"
+        android:textColorHint="#FFFFFF"
+        android:layout_below="@+id/LblArticle"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="60dp"
+    />
+    <LinearLayout
+        android:id="@+id/containerEt"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_below="@+id/modif_descArticle_utilFo"
+        android:layout_marginTop="40dp"
+        android:gravity="center">
+
+        <EditText
+            android:id="@+id/modif_prixArticle_utilFo"
+            android:layout_width="70dp"
+            android:layout_height="wrap_content"
+            android:autofillHints="Prix"
+            android:gravity="center"
+            android:hint="Prix"
+            android:inputType="numberDecimal"
+            android:textColor="#FFFFFF"
+            android:textColorHint="#FFFFFF" />
+
+        <EditText
+            android:id="@+id/modif_qteArticle_utilFo"
+            android:layout_width="70dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:autofillHints="Qte"
+            android:gravity="center"
+            android:hint="Qte"
+            android:inputType="number"
+            android:textColor="#FFFFFF"
+            android:textColorHint="#FFFFFF" />
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/annuler_ModifFo"
+        android:layout_width="250dp"
+        android:layout_height="50dp"
+        android:layout_below="@+id/containerEt"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="40dp"
+        android:layout_marginBottom="20dp"
+        android:background="#CAC4C4"
+        android:text="Annuler"
+        android:textColor="#FFFFFF" />
+
+    <Button
+        android:id="@+id/modifier_ModiFo"
+        android:layout_width="250dp"
+        android:layout_height="50dp"
+        android:layout_below="@+id/annuler_ModifFo"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="60dp"
+        android:background="#FFFFFF"
+        android:text="Modifier"
+        android:textColor="#14B1A4" />
+
+</RelativeLayout>

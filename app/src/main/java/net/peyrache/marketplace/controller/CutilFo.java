@@ -3,6 +3,7 @@ package net.peyrache.marketplace.controller;
 import android.content.Context;
 import android.util.Log;
 
+import net.peyrache.marketplace.model.Article;
 import net.peyrache.marketplace.model.UtilisateurFo;
 import net.peyrache.marketplace.tools.SqLiteAccessRequest;
 
@@ -34,12 +35,17 @@ private Context context;
     }
 
     //Permet de récupérer une valeur booléenne pour savoir si l'article existe déjà ou non.
+    /*public Boolean articleExistUneFoisModif(String nomArticle, Integer nUtilisateur){
+        sqLiteAccessRequest = new SqLiteAccessRequest(context);
+        Boolean exist = sqLiteAccessRequest.articleExistUneFoisModif(nomArticle, nUtilisateur);
+        sqLiteAccessRequest.close();
+        return exist;
+    }*/
     public Boolean articleExist(String nomArticle, Integer nUtilisateur){
         sqLiteAccessRequest = new SqLiteAccessRequest(context);
         Boolean exist = sqLiteAccessRequest.articleExist(nomArticle, nUtilisateur);
         sqLiteAccessRequest.close();
         return exist;
-
     }
 
     //Permet l'ajout de l'article. Prend en paramètre articleExist pour éviter les erreurs lors de l'utilisation de cette méthode.
@@ -49,4 +55,21 @@ private Context context;
         sqLiteAccessRequest.close();
     }
 
+    public List<Article> listeArticle(Integer idUtilisateur){
+        sqLiteAccessRequest = new SqLiteAccessRequest(context);
+        List<Article> listeArticle = sqLiteAccessRequest.listeArticleAjoutUtilFo(idUtilisateur);
+        sqLiteAccessRequest.close();
+        return listeArticle;
+    }
+    /*public Article rechercheArticle(String nomArticle, Integer idUtilisateur){
+        sqLiteAccessRequest = new SqLiteAccessRequest(context);
+        Article article = sqLiteAccessRequest.rechercheArticle(nomArticle, idUtilisateur);
+        sqLiteAccessRequest.close();
+        return article;
+    }*/
+    public void articleUpdate(String ancienNomArticle, String descriptionArticle, Float prix, Integer qte, Integer idUtilisateur){
+        sqLiteAccessRequest = new SqLiteAccessRequest(context);
+        sqLiteAccessRequest.articleUpdate(ancienNomArticle, descriptionArticle, prix, qte, idUtilisateur);
+        sqLiteAccessRequest.close();
+    }
 }

@@ -25,13 +25,19 @@
     <show-object-properties value="true" />
     <loaded-nodes>
       <connection connection-id="66c84f80-cce7-4c9a-bd50-352173e3ce16">
-        <schema name="main" object-types="table, view, index, constraint, column, dataset trigger" />
+        <schema name="main" object-types="dataset trigger, column, index, table, constraint" />
       </connection>
     </loaded-nodes>
   </component>
   <component name="DBNavigator.Project.DatabaseConsoleManager">
     <connection id="66c84f80-cce7-4c9a-bd50-352173e3ce16">
-      <console name="Connection" type="STANDARD" schema="main" session="Main"><![CDATA[SELECT nomArticle FROM article, utilisateur WHERE article.idUtilisateur = utilisateur.idUtilisateur AND nomArticle = 'petibulle' AND article.idUtilisateur = 1;]]></console>
+      <console name="Connection" type="STANDARD" schema="main" session="Main"><![CDATA[SELECT COUNT(nomArticle) as nombreArticle
+FROM article, utilisateur
+WHERE article.idUtilisateur = utilisateur.idUtilisateur
+AND nomArticle = 'petibulle'
+AND raisonSociale = (SELECT raisonSociale
+                     FROM utilisateur
+                     WHERE idUtilisateur = 1)]]></console>
     </connection>
   </component>
   <component name="DBNavigator.Project.DatabaseFileManager">

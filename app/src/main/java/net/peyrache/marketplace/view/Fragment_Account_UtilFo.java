@@ -14,6 +14,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 
 import net.peyrache.marketplace.R;
 import net.peyrache.marketplace.controller.CpageAccueil;
@@ -67,6 +68,10 @@ public class Fragment_Account_UtilFo extends Fragment {
 
             @Override
             public void onClick(View v) {
+
+                //Initialisation de la variable reload
+                FragmentTransaction reload = getFragmentManager().beginTransaction();
+
                String rs_modif_utilFoSTR = rs_modif_utilFo.getText().toString();
                String rib_modif_utilFoSTR = rib_modif_utilFo.getText().toString();
                String addr_modif_utilFoSTR = addr_modif_utilFo.getText().toString();
@@ -83,6 +88,8 @@ public class Fragment_Account_UtilFo extends Fragment {
                         cutil.modifUserFo(utilFo.getUsername(), pass_modif_utilFoSTR, mail_modif_utilFoSTR,
                                 addr_modif_utilFoSTR, rib_modif_utilFoSTR, rs_modif_utilFoSTR);
                         Toast.makeText(context, "Modification/s effectuée/s", Toast.LENGTH_SHORT).show();
+                        //Enleve le fragment courrant pour le remplacer par le même
+                        reload.detach(Fragment_Account_UtilFo.this).attach(Fragment_Account_UtilFo.this).commit();
                 }
             }
         });

@@ -1,25 +1,17 @@
 package net.peyrache.marketplace.tools;
 
-import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-import android.nfc.Tag;
 import android.util.Log;
-import android.widget.ArrayAdapter;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 
 import net.peyrache.marketplace.model.UtilisateurAc;
 import net.peyrache.marketplace.model.UtilisateurFo;
+import net.peyrache.marketplace.model.Article;
 
 import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Iterator;
 import java.util.List;
-import java.util.ListIterator;
 
 public class SqLiteAccessRequest extends SQLiteOpenHelper {
 
@@ -377,7 +369,9 @@ public class SqLiteAccessRequest extends SQLiteOpenHelper {
                              "FROM article, utilisateur " +
                              "WHERE article.idUtilisateur = utilisateur.idUtilisateur " +
                              "AND nomArticle = '"+nomArticle+"'" +
-                             "AND article.idUtilisateur = '"+nUtilisateur+"'";
+                             "AND raisonSociale = (SELECT raisonSociale " +
+                             "FROM utilisateur " +
+                             "WHERE idUtilisateur = '"+nUtilisateur+"')";
 
         //Essaie d'exécution de la requête.
         try{
@@ -436,9 +430,66 @@ public class SqLiteAccessRequest extends SQLiteOpenHelper {
         }
     }
 
+    public List<Article> listeArticleAjoutUtilFo(Integer idUtilisateur){
+
+        List<Article> listeArticle = new ArrayList<Article>();
+        Article article;
+
+        String strSql = "SELECT article.idUtilisateur, cat, nomArticle, prix, description, stock, nArticle " +
+                        "FROM article, utilisateur " +
+                        "WHERE utilisateur.idUtilisateur=article.idUtilisateur " +
+                        "AND utilisateur.raisonSociale = (SELECT raisonSociale " +
+                                                          "FROM utilisateur " +
+                                                          "WHERE utilisateur.idUtilisateur = "+idUtilisateur+")"
+                        +"";
+
+            Cursor sqlCursorArt = this.getReadableDatabase().rawQuery(strSql, null);
+            sqlCursorArt.moveToFirst();
+
+            if(sqlCursorArt.moveToFirst()){
+                do {
+                    article = new Article(sqlCursorArt.getInt(6), sqlCursorArt.getInt(0), sqlCursorArt.getString(1),
+                            sqlCursorArt.getString(2), sqlCursorArt.getFloat(3),
+                            sqlCursorArt.getString(4), sqlCursorArt.getInt(5));
+                    listeArticle.add(article);
+                    Log.d("ListeArticle", "Ajout d'un article");
+                }while (sqlCursorArt.moveToNext());
+            }
+
+            sqlCursorArt.close();
+            this.getReadableDatabase().close();
+        return listeArticle;
+    }
+
+    /**
+     * Méthode faisant une requête d'update pour l'article modifié
+     * @param ancienNomArticle
+     * @param descriptionArticle
+     * @param prix
+     * @param qte
+     * @param idUtilisateur
+     */
+    public void articleUpdate(String ancienNomArticle, String descriptionArticle, Float prix, Integer qte, Integer idUtilisateur){
+
+        ancienNomArticle = ancienNomArticle.replace("'", "''");
+        descriptionArticle = descriptionArticle.replace("'", "''");
+
+        String strSqlUpdate = "UPDATE article " +
+                              "SET description ='"+descriptionArticle+"'," +
+                              "prix ="+prix+"," +
+                              "stock = "+qte+" " +
+                              "WHERE nomArticle='"+ancienNomArticle+"'";
+        try{
+            this.getWritableDatabase().execSQL(strSqlUpdate);
+            this.getWritableDatabase().close();
+            Log.d("UpdateArticle", "L'update a bien été pris en compte");
+        }catch(Exception e){
+            Log.d("UpdateArticle", "Erreur dans la requête");
+        }
+    }
 
 
-    public void articleSuppr(String nomArticle){
+    /*public void articleSuppr(String nomArticle){
         nomArticle = nomArticle.replace("'","''");
 
         String strSql = "DELETE FROM article WHERE nomArticle='"+nomArticle+"'";
@@ -448,7 +499,7 @@ public class SqLiteAccessRequest extends SQLiteOpenHelper {
         }catch (Exception e){
             Log.d("supprArticle", "Echec lors de l'exécution de la requête sql");
         }
-    }
+    }*/
 
     /**
      * Permet de récuperer le nom des catégories sous forme de tableau.
@@ -477,6 +528,4 @@ public class SqLiteAccessRequest extends SQLiteOpenHelper {
         return labels;
     }
     //endregion
-
-
 }
