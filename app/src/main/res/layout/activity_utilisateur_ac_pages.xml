@@ -22,7 +22,7 @@
         app:menu="@menu/menu"
         app:itemTextColor="@drawable/bottom_colors"
         app:itemIconTint="@drawable/bottom_colors"
-        android:background="@color/bottomColor"
+        android:background="@color/bottomColorAc"
     />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

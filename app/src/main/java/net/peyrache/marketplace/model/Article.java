@@ -40,8 +40,9 @@ public class Article implements Parcelable {
     public Integer getQte() {
         return this.qte;
     }
-    public Integer getnArticle(){
-        return this.getnArticle();
+
+    public Integer getnArticle() {
+        return nArticle;
     }
 
     public Integer setIdUtilisateur(Integer idUtilisateur){

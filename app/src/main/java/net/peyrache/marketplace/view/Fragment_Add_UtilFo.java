@@ -75,8 +75,7 @@ public class Fragment_Add_UtilFo extends Fragment {
         spinnerCat.setAdapter(dataAdapter);
         
         ecouteurAjout(context);
-
-
+        
     }
 
     private void ecouteurAjout(final Context context) {

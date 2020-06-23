@@ -47,8 +47,10 @@ public class Fragment_Home_UtilFo extends Fragment {
         listViewArticle = view.findViewById(R.id.listViewArticles);
         cutilFo = new CutilFo(context);
         ArrayList<Article> listeArticle = (ArrayList<Article>)cutilFo.listeArticle(utilFo.getnUtilisateur());
+
         home_utilFo_listAdapter = new Home_UtilFo_ListAdapter(context, listeArticle);
         listViewArticle.setAdapter(home_utilFo_listAdapter);
+
         ecouteurListViewArticle(context, view);
     }
 

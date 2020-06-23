@@ -78,7 +78,6 @@ public class Fragment_ModifArticle_utilFo extends Fragment {
             @Override
             public void onClick(View v) {
                 try {
-
                     String descriptionSTR = description.getText().toString();
                     Float prixFLOAT = Float.parseFloat(prix.getText().toString());
                     Integer qteINT = Integer.parseInt(qte.getText().toString());

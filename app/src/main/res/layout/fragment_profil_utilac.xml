@@ -1,14 +1,79 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@android:color/holo_orange_dark">
+    android:background="#254C36">
 
     <TextView
+        android:id="@+id/LblMajProfilAc"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:gravity="center"
-        android:text="Hello World"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:text="Mettre à jour votre profil"
         android:textColor="#FFFFFF"
-        android:textSize="25sp" />
-</androidx.constraintlayout.widget.ConstraintLayout>
+        android:textSize="30sp"
+        android:layout_marginTop="60dp"
+    />
+    <EditText
+        android:id="@+id/modif_password_utilAC"
+        android:inputType="textPassword"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:hint="Password"
+        android:autofillHints="Password"
+        android:textColorHint="#FFFFFF"
+        android:textColor="#FFFFFF"
+        android:layout_below="@+id/LblMajProfilAc"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="60dp"
+    />
+    <EditText
+        android:id="@+id/modifAdresseUtilAc"
+        android:inputType="textPostalAddress"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:hint="Adresse postale"
+        android:autofillHints="Adresse postale"
+        android:textColorHint="#FFFFFF"
+        android:textColor="#FFFFFF"
+        android:layout_below="@+id/modif_password_utilAC"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"
+    />
+    <EditText
+        android:id="@+id/modifRibUtilAc"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:hint="Rib"
+        android:autofillHints="Rib"
+        android:textColorHint="#FFFFFF"
+        android:textColor="#FFFFFF"
+        android:layout_below="@+id/modifAdresseUtilAc"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"
+    />
+    <EditText
+        android:id="@+id/modifEmailUtilAc"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/modifRibUtilAc"
+        android:hint="Email"
+        android:autofillHints="Email"
+        android:textColorHint="#FFFFFF"
+        android:textColor="#FFFFFF"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"
+    />
+    <Button
+        android:id="@+id/modifProfilUtilAc"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:text="Modifier"
+        android:background="#FFFFFF"
+        android:layout_below="@+id/modifEmailUtilAc"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="40dp"
+    />
+
+</RelativeLayout>

@@ -27,7 +27,6 @@ public class InscriptionAc extends Inscription{
     public String getPaiement() {
         return paiement;
     }
-
 }
 
 

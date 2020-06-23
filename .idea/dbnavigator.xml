@@ -23,21 +23,14 @@
     <autoscroll-to-editor value="false" />
     <autoscroll-from-editor value="true" />
     <show-object-properties value="true" />
-    <loaded-nodes>
-      <connection connection-id="66c84f80-cce7-4c9a-bd50-352173e3ce16">
-        <schema name="main" object-types="dataset trigger, column, index, table, constraint" />
-      </connection>
-    </loaded-nodes>
+    <loaded-nodes />
   </component>
   <component name="DBNavigator.Project.DatabaseConsoleManager">
     <connection id="66c84f80-cce7-4c9a-bd50-352173e3ce16">
-      <console name="Connection" type="STANDARD" schema="main" session="Main"><![CDATA[SELECT COUNT(nomArticle) as nombreArticle
-FROM article, utilisateur
-WHERE article.idUtilisateur = utilisateur.idUtilisateur
-AND nomArticle = 'petibulle'
-AND raisonSociale = (SELECT raisonSociale
-                     FROM utilisateur
-                     WHERE idUtilisateur = 1)]]></console>
+      <console name="Connection" type="STANDARD" schema="main" session="Main"><![CDATA[SELECT raisonSociale 
+FROM utilisateur, article 
+WHERE utilisateur.idUtilisateur=article.idUtilisateur 
+AND nArticle = 1]]></console>
     </connection>
   </component>
   <component name="DBNavigator.Project.DatabaseFileManager">
@@ -48,6 +41,7 @@ AND raisonSociale = (SELECT raisonSociale
   </component>
   <component name="DBNavigator.Project.DatasetFilterManager">
     <filter-actions connection-id="66c84f80-cce7-4c9a-bd50-352173e3ce16" dataset="main.article" active-filter-id="EMPTY_FILTER" />
+    <filter-actions connection-id="66c84f80-cce7-4c9a-bd50-352173e3ce16" dataset="main.commandes" active-filter-id="EMPTY_FILTER" />
     <filter-actions connection-id="66c84f80-cce7-4c9a-bd50-352173e3ce16" dataset="main.utilisateur" active-filter-id="EMPTY_FILTER" />
     <filter-actions connection-id="66c84f80-cce7-4c9a-bd50-352173e3ce16" dataset="main.categorie" active-filter-id="EMPTY_FILTER" />
   </component>
@@ -292,6 +286,8 @@ AND raisonSociale = (SELECT raisonSociale
           <content-type name="Java" enabled="true" />
           <content-type name="SQL" enabled="true" />
           <content-type name="PL/SQL" enabled="true" />
+          <content-type name="JSON" enabled="true" />
+          <content-type name="JSON5" enabled="true" />
           <content-type name="Groovy" enabled="true" />
           <content-type name="AIDL" enabled="true" />
           <content-type name="YAML" enabled="true" />

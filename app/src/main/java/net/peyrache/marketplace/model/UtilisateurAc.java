@@ -66,7 +66,7 @@ public class UtilisateurAc extends Utilisateur implements Parcelable {
         this.paiement = paiement;
     }
 
-    public Integer getIdUtilisateur(){
+    public Integer getnUtilisateur() {
         return this.nUtilisateur;
     }
 
@@ -84,12 +84,7 @@ public class UtilisateurAc extends Utilisateur implements Parcelable {
             sexe = in.readInt();
         }
         paiement = in.readString();
-
-        if (in.readByte() == 0) {
-            nUtilisateur = null;
-        } else {
-            nUtilisateur = in.readInt();
-        }
+        nUtilisateur = in.readInt();
     }
 
     public static final Creator<UtilisateurAc> CREATOR = new Creator<UtilisateurAc>() {
@@ -108,6 +103,7 @@ public class UtilisateurAc extends Utilisateur implements Parcelable {
     public int describeContents() {
         return 0;
     }
+
     @Override
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeString(this.username);
@@ -120,6 +116,5 @@ public class UtilisateurAc extends Utilisateur implements Parcelable {
         dest.writeInt(this.sexe);
         dest.writeString(this.paiement);
         dest.writeInt(this.nUtilisateur);
-
     }
 }

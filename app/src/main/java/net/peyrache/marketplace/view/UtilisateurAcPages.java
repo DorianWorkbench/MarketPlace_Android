@@ -30,7 +30,7 @@ public class UtilisateurAcPages extends AppCompatActivity {
     private void init(){
         bottomNav= findViewById(R.id.container_items_bottom);
         intent= getIntent();
-        utilisateur=intent.getParcelableExtra("utilisateur");
+        utilisateur=(UtilisateurAc)intent.getParcelableExtra("utilisateur");
         ecouteurBottomNav();
     }
 
@@ -38,18 +38,16 @@ public class UtilisateurAcPages extends AppCompatActivity {
         bottomNav.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                Toast.makeText(UtilisateurAcPages.this,utilisateur.getRib(), Toast.LENGTH_SHORT).show();
                 Fragment fragmentSelected=null;
-
                 switch(item.getItemId()){
                     case R.id.nav_home:
-                        fragmentSelected= new Fragment_Home_UtilAc();
+                        fragmentSelected= new Fragment_Home_UtilAc(utilisateur);
                         break;
                     case R.id.nav_basket:
-                        fragmentSelected= new Fragment_Basket_UtilAc();
+                        fragmentSelected= new Fragment_Basket_UtilAc(utilisateur);
                         break;
                     case R.id.nav_account:
-                        fragmentSelected= new Fragment_profil_UtilAc();
+                        fragmentSelected= new Fragment_profil_UtilAc(utilisateur);
                         break;
                 }
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragments_container, fragmentSelected).commit();

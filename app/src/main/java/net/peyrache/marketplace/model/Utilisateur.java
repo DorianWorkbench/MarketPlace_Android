@@ -8,6 +8,4 @@ abstract class Utilisateur {
     protected String type;
     protected String rib;
     protected Integer nUtilisateur;
-
-
 }

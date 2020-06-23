@@ -1,6 +1,51 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:weightSum="100"
+    android:orientation="horizontal">
+    <TextView
+        android:id="@+id/row_Article"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:text="Article"
+        android:gravity="center"
+        android:textSize="17dp"
+        android:layout_weight="33.3"
+    />
+    <TextView
+        android:id="@+id/row_Fournisseur"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:text="Fournisseur"
+        android:gravity="center"
+        android:textSize="17dp"
+        android:layout_weight="33.3"
+        />
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="33.3">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <TextView
+            android:id="@+id/row_Qte"
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:text="Qte"
+            android:gravity="center"
+            android:textSize="15dp"
+        />
+
+        <TextView
+            android:id="@+id/row_Prix"
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:text="Prix"
+            android:textSize="15dp"
+            android:gravity="center"
+        />
+
+    </LinearLayout>
+
+</LinearLayout>

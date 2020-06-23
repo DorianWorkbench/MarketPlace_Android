@@ -81,10 +81,10 @@ public class InscriptionActivity extends AppCompatActivity {
                         inscPostalAddressEt.isEmpty() || inscSurname.isEmpty() ||
                         inscName.isEmpty() || inscRib.isEmpty() || !(man.isChecked()) && !(woman.isChecked()))) {
                     //Si l'utilisateur n'existe pas permettre.
-                    if(inscriptionActivity.utilExist(inscUsername)){
+                    if(inscriptionActivity.utilExist(inscUsername.toLowerCase())){
 
                         // Utilisation de la méthode d'inscription d'utilisateur de type Acheteur.
-                        inscriptionActivity.getInscriptionInstanceAc(inscUsername, inscPassword, inscEmailEt, inscPostalAddressEt, inscSurname, inscName, sexe, inscRib);
+                        inscriptionActivity.getInscriptionInstanceAc(inscUsername.toLowerCase(), inscPassword, inscEmailEt, inscPostalAddressEt, inscSurname, inscName, sexe, inscRib);
                         Toast.makeText(InscriptionActivity.this, "Bravo vous vous êtes enregistré", Toast.LENGTH_SHORT).show();
 
                         // Renvoie vers la page de connexion.

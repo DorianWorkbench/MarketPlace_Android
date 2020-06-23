@@ -1,15 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
+<RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/colorAccent">
 
     <TextView
-        android:id="@+id/tvUtilAc"
+        android:id="@+id/TvArticlesAc"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Articles Disponibles"
+        android:textColor="#FFFFFF"
+        android:textSize="30dp"
+        android:gravity="center"
+        android:layout_marginTop="60dp"
+    />
+
+    <ListView
+        android:id="@+id/container_Article"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:gravity="center"
-        android:text="Hello World"
-        android:textColor="#FFFFFF"
-        android:textSize="25sp" />
-</androidx.constraintlayout.widget.ConstraintLayout>
+        android:layout_below="@+id/TvArticlesAc"
+        android:layout_marginTop="60dp"
+        android:layout_marginBottom="60dp"
+    />
+
+</RelativeLayout>

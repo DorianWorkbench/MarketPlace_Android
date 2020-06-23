@@ -28,13 +28,13 @@
     <string name="inscfo_buttonSubscribe">S\'inscrire</string>
 
 
-    <string name="home">Home</string>
-    <string name="basket">Basket</string>
-    <string name="account">Account</string>
+    <string name="home">Articles</string>
+    <string name="basket">Commandes</string>
+    <string name="account">Compte</string>
 
-    <string name="home_fo">Home</string>
-    <string name="add">Add</string>
-    <string name="account_fo">Account</string>
+    <string name="home_fo">Accueil</string>
+    <string name="add">Ajout</string>
+    <string name="account_fo">Compte</string>
 
     <string name="rs_util_fo">Raison sociale</string>
     <string name="rib_util_fo">Rib</string>

@@ -6,6 +6,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
+import net.peyrache.marketplace.model.Commande;
 import net.peyrache.marketplace.model.UtilisateurAc;
 import net.peyrache.marketplace.model.UtilisateurFo;
 import net.peyrache.marketplace.model.Article;
@@ -44,26 +45,32 @@ public class SqLiteAccessRequest extends SQLiteOpenHelper {
                 +"idUtilisateur INTEGER NOT NULL,"
                 +"cat TEXT NOT NULL,"
                 +"nomArticle TEXT NOT NULL,"
-                +"prix INTEGER NOT NULL,"
+                +"prix REAL NOT NULL,"
                 +"description TEXT,"
                 +"stock INTEGER NOT NULL,"
                 +"FOREIGN KEY(idUtilisateur) REFERENCES utilisateur(idUtilisateur)"
                 +")";
+
+        String strSql6="CREATE TABLE commandes(" +
+                        "nCommande INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT," +
+                        "idUtilisateur INTEGER NOT NULL," +
+                        "nArticle Integer NOT NULL," +
+                        "prixArticle REAL NOT NULL," +
+                        "nomArticle TEXT NOT NULL,"+
+                        "FOREIGN KEY(idUtilisateur) REFERENCES utilisateur(idUtilisateur)," +
+                        "FOREIGN KEY(nArticle) REFERENCES article(nArticle))";
 
         String strSql3 = "CREATE TABLE categorie(" +
                          "categorie TEXT NOT NULL PRIMARY KEY)";
 
         String strSql4 = "INSERT INTO categorie(categorie) VALUES('Boisson')";
         String strSql5 = "INSERT INTO categorie(categorie) VALUES('Manger')";
-        /*
-        String strSql6 = "INSERT INTO article(idUtilisateur, cat, nomArticle, prix, description, stock) " +
-                                 "VALUES(1, 'Boisson', 'petibulle', 35, 'ddd',20)";
 
-         */
 
         db.execSQL(strSql);
         db.execSQL(strSql2);
         db.execSQL(strSql3);
+        db.execSQL(strSql6);
         try{
             db.execSQL(strSql4);
             db.execSQL(strSql5);
@@ -79,6 +86,7 @@ public class SqLiteAccessRequest extends SQLiteOpenHelper {
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
 
     }
+
     //region Utilisateur
 
     //region Inscritpion utilisateur
@@ -276,33 +284,24 @@ public class SqLiteAccessRequest extends SQLiteOpenHelper {
      * @param password
      * @param email
      * @param adresse
-     * @param sexe
-     * @param nom
-     * @param prenom
      * @param rib
      */
-    public void updateProfilAc(String username, String password, String email, String adresse, Integer sexe,
-                               String nom, String prenom, String rib){
+    public void updateProfilAc(String username, String password, String adresse, String rib, String email){
 
         //Mise en forme du champs texte pour la requête.
-        password = password.replace("'","''");
-        email = email.replace("'","''");
-        adresse = adresse.replace("'","''");
-        nom = nom.replace("'","''");
-        prenom = prenom.replace("'","''");
-        rib = rib.replace("'","''");
         username = username.replace("'","''");
+        password = password.replace("'","''");
+        adresse = adresse.replace("'","''");
+        rib = rib.replace("'","''");
+        email = email.replace("'","''");
 
         //Requête d'update de l'acheteur.
-        String strSql = "UPDATE utilisateur" +
-                "SET password = '"+password+"'," +
-                "email = '"+email+"'," +
-                "adresse = '"+adresse+"'," +
-                "sexe = "+sexe+"," +
-                "nom = '"+nom+"'," +
-                "prenom = '"+prenom+"'," +
-                "rib = '"+rib+"'" +
-                "WHERE username = '"+username+"'";
+        String strSql = "UPDATE utilisateur " +
+                        "SET password = '"+password+"', " +
+                        "adresse='"+adresse+"', " +
+                        "rib='"+rib+"', " +
+                        "email='"+email+"' " +
+                        "WHERE username = '"+username+"'";
 
         //Test de l'exécution de la requête.
         try{
@@ -430,6 +429,11 @@ public class SqLiteAccessRequest extends SQLiteOpenHelper {
         }
     }
 
+    /**
+     * Permet d'ajouter un article à la liste d'article.
+     * @param idUtilisateur
+     * @return
+     */
     public List<Article> listeArticleAjoutUtilFo(Integer idUtilisateur){
 
         List<Article> listeArticle = new ArrayList<Article>();
@@ -488,19 +492,6 @@ public class SqLiteAccessRequest extends SQLiteOpenHelper {
         }
     }
 
-
-    /*public void articleSuppr(String nomArticle){
-        nomArticle = nomArticle.replace("'","''");
-
-        String strSql = "DELETE FROM article WHERE nomArticle='"+nomArticle+"'";
-        try{
-            this.getWritableDatabase().execSQL(strSql);
-            Log.d("supprArticle", "Suppression effectuée");
-        }catch (Exception e){
-            Log.d("supprArticle", "Echec lors de l'exécution de la requête sql");
-        }
-    }*/
-
     /**
      * Permet de récuperer le nom des catégories sous forme de tableau.
      * @return Le tableau des catégories de la table categorie.
@@ -527,5 +518,190 @@ public class SqLiteAccessRequest extends SQLiteOpenHelper {
         // returning lables
         return labels;
     }
+    //endregion
+
+    //region Boutique/Acheteur
+
+    /**
+     * Fait une liste de tous les articles
+     * @return
+     */
+    public List<Article> affichageBoutique(){
+            List<Article> listeBoutique = new ArrayList<Article>();
+
+            String strSqlAffich = "SELECT nArticle, idUtilisateur, cat, nomArticle, prix, description, stock FROM article WHERE stock>0";
+            Cursor cursorAffich = this.getReadableDatabase().rawQuery(strSqlAffich, null);
+            cursorAffich.moveToFirst();
+
+            if(cursorAffich.moveToFirst()){
+                do{
+                    Article articleAffiche = new Article(cursorAffich.getInt(0), cursorAffich.getInt(1),cursorAffich.getString(2),
+                                                         cursorAffich.getString(3),cursorAffich.getFloat(4),cursorAffich.getString(5),
+                                                         cursorAffich.getInt(6));
+                    listeBoutique.add(articleAffiche);
+                }while(cursorAffich.moveToNext());
+            }
+            return listeBoutique;
+        }
+
+    /**
+     * Permet de savoir si il y a suffisement d'article en stock
+     * @param nArticle
+     * @return
+     */
+    public Boolean stockSuffisant(Integer nArticle){
+
+        String strSqlStock = "SELECT stock " +
+                             "FROM article " +
+                             "WHERE nArticle = "+nArticle+"";
+
+        Cursor cursorStock = this.getReadableDatabase().rawQuery(strSqlStock, null);
+        cursorStock.moveToFirst();
+        if(cursorStock.moveToFirst()){
+            do {
+                if(cursorStock.getInt(0)>0){
+                    this.getReadableDatabase().close();
+                    Log.d("stockSuffisant", "Le stock est suffisant");
+                    return true;
+                }
+                else{
+                    this.getReadableDatabase().close();
+                    Log.d("stockSuffisant", "Le stock est insuffisant");
+                    return false;
+                }
+            }while(cursorStock.moveToNext());
+        }
+        this.getReadableDatabase().close();
+        return false;
+        }
+        /**
+     * Ajoute une commande à la base de données (Table commandes)
+     * @param idUtilisateur
+     * @param nArticle
+     * @param prixArticle
+     */
+        public void ajoutCommande(Integer idUtilisateur, Integer nArticle, Float prixArticle, String nomArticle){
+            String strSql = "INSERT INTO commandes(idUtilisateur, nArticle, prixArticle, nomArticle) " +
+                            "VALUES("+idUtilisateur+", "+nArticle+", "+prixArticle+", '"+nomArticle+"')";
+            
+            try{
+                this.getWritableDatabase().execSQL(strSql);
+                this.getWritableDatabase().close();
+                Log.d("AjoutCommande", "Commande Ajoutée");
+                String strSqlDeleteStock = "UPDATE article SET stock = stock-1 WHERE nArticle = "+nArticle+"";
+                try{
+                    this.getWritableDatabase().execSQL(strSqlDeleteStock);
+                    this.getWritableDatabase().close();
+                    Log.d("DeleteArticle", "L'article a été soustrait de 1 dans son stock");
+                }catch (Exception e){
+                    Log.d("DeleteArticle", "Echec de la requête");
+                }
+            }catch (Exception e){
+                Log.d("AjoutCommande", "Erreur sql");
+            }
+        }
+
+    /**
+     * Création de la liste répertoriant les commandes de l'utilisateur courrant
+     * @param idUtilisateur
+     * @return
+     */
+    public List<Commande> listeCommandes(Integer idUtilisateur){
+
+            List<Commande> listeCommandes = new ArrayList<Commande>();
+
+            String strSql ="SELECT nCommande, commandes.idUtilisateur, nArticle, prixArticle, nomArticle " +
+                           "FROM commandes "+
+                           "WHERE commandes.idUtilisateur="+idUtilisateur+"";
+
+            Cursor cursorListeCommandes = this.getReadableDatabase().rawQuery(strSql, null);
+            cursorListeCommandes.moveToFirst();
+
+            if (cursorListeCommandes.moveToFirst()){
+                do{
+                    Commande commande = new Commande(cursorListeCommandes.getInt(0), cursorListeCommandes.getInt(1),
+                                                     cursorListeCommandes.getInt(2), cursorListeCommandes.getFloat(3),
+                                                     cursorListeCommandes.getString(4));
+                    listeCommandes.add(commande);
+                    Log.d("AjoutLigneCommandeStr", "Ligne ajoutée");
+                }while(cursorListeCommandes.moveToNext());
+            }
+            this.getReadableDatabase().close();
+            return listeCommandes;
+        }
+
+    /**
+     * Permet de trouver le fournisseur pour l'article sélectionné.
+     * @param nArticle
+     * @return
+     */
+    public String fournisseurArticle(Integer nArticle){
+        String fournisseur="";
+        String strSqlNomFournisseur = "SELECT raisonSociale " +
+                                      "FROM utilisateur, article " +
+                                      "WHERE utilisateur.idUtilisateur=article.idUtilisateur " +
+                                      "AND nArticle = "+nArticle+"";
+
+        Cursor cursorRaisonSociale = this.getReadableDatabase().rawQuery(strSqlNomFournisseur, null);
+        cursorRaisonSociale.moveToFirst();
+        if(cursorRaisonSociale.moveToFirst()){
+            do{
+                this.getReadableDatabase().close();
+                Log.d("RaisonSociale", "La raison Sociale à été trouvée"+ cursorRaisonSociale.getString(0));
+                return fournisseur=cursorRaisonSociale.getString(0);
+            }while(cursorRaisonSociale.moveToNext());
+        }
+        return null;
+        }
+    /**
+     * Supprime la ligne commande sélectionnée et le rajoute au stock de l'article.
+     * Doit être utilisé avec la méthode d'ajout d'article par rapport au nArticle.
+     * @param idUtilisateur
+     * @param nArticle
+     */
+    public void supprLigneCommande(Integer idUtilisateur, Integer nArticle, Integer nCommande){
+
+            String strSupprLigneCommande = "DELETE FROM commandes " +
+                                      "WHERE idUtilisateur = "+idUtilisateur+" " +
+                                      "AND nArticle = "+nArticle+" " +
+                                      "AND nCommande = "+nCommande+"";
+            String updateArticle = "UPDATE article " +
+                                   "SET stock = stock+1 " +
+                                   "WHERE nArticle = "+nArticle+"";
+
+            try{
+                this.getWritableDatabase().execSQL(updateArticle);
+                this.getWritableDatabase().close();
+                this.getWritableDatabase().execSQL(strSupprLigneCommande);
+                this.getWritableDatabase().close();
+                Log.d("SupprLigneCommande", "L'article a été enlevé et la mise à jour à été faite");
+            }catch (Exception e){
+                Log.d("SupprLigneCommande", "Erreur Sql");
+            }
+        }
+        public void supprToutesCommandes(ArrayList<Commande> listeCommande, Integer nUtilisateur){
+
+        for(int i = 0; i<listeCommande.size(); i++){
+
+            String strSqlUpdate ="UPDATE article " +
+                                 "SET stock = stock+1 " +
+                                 "WHERE nArticle = "+listeCommande.get(i).getnArticle()+"";
+
+            try{
+                this.getWritableDatabase().execSQL(strSqlUpdate);
+                Log.d("Suppression", "Suppression et rajout du stock dans article");
+            }catch (Exception e){
+                Log.d("Suppression", "Echec");
+            }
+        }
+
+        String strSqlDelete = "DELETE FROM commandes " +
+                              "WHERE idUtilisateur = "+nUtilisateur+"";
+
+            this.getWritableDatabase().close();
+            this.getWritableDatabase().execSQL(strSqlDelete);
+            this.getWritableDatabase().close();
+    }
+
     //endregion
 }

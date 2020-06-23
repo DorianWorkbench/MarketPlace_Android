@@ -1,6 +1,34 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="horizontal"
+    android:weightSum="100">
+    
+    <TextView
+        android:id="@+id/LblComArticle"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_weight="33.3"
+        android:text="Article"
+        android:gravity="center"
+    />
+    
+    <TextView
+        android:id="@+id/LblComFournisseur"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_weight="33.3"
+        android:text="Fournisseur"
+        android:gravity="center"
+    />
+    <TextView
+        android:id="@+id/LblComPrixArticle"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:gravity="center"
+        android:text="Prix"
+        android:layout_weight="33.3"
+        />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+</LinearLayout>

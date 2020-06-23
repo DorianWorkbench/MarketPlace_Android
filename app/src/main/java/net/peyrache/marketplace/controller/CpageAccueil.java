@@ -8,7 +8,7 @@ import net.peyrache.marketplace.tools.SqLiteAccessRequest;
 
 public class CpageAccueil {
     private SqLiteAccessRequest sqLiteAccessRequest;
-    private UtilisateurAc utilisateur;
+    //private UtilisateurAc utilisateur;
     private Context context;
 
     //Constructeur CpageAccueil retournant le contenu du constructeur Object.
